@@ -1,0 +1,64 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0; /*removing all margins to style*/
+
+  /*styling background of a page*/
+  background-color: lightgray;
+}
+/*Header layout
+================*/
+header {
+  /*position of header*/
+  height: 150px;
+  width: 50%;
+  min-width: 600px;
+  margin: 20px auto 0px;
+  border-top-left-radius: 45px;
+  border-top-right-radius: 45px;
+  margin-bottom: -40px;
+  z-index: 1;
+  /*style of header*/
+  background-color: #eee;
+  padding: 10px 30px;
+}
+/*Main layout
+================*/
+main {
+  /*position of main*/
+  width: 50%;
+  min-width: 600px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  z-index: 2;
+  position: relative;
+  background-color: #fff;
+
+  border-radius: 45px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  padding: 35px 20px;
+
+  text-align: center;
+}
+
+/*Footer
+================*/
+footer {
+  width: 50%;
+  min-width: 600px;
+  margin: 20px auto 0px;
+  background-color: #bbb;
+  border-bottom-left-radius: 45px;
+  border-bottom-right-radius: 45px;
+  padding: 40px 30px 10px;
+  z-index: 1;
+  height: 150px;
+  margin-top: -40px;
+}

@@ -1,42 +1,35 @@
 "use strict";
-let concentrationMode = false;
-
-function checkAnswer(str) {
-  alert(str);
-  //   if (+playground.innerHTML + 1 === +str) alert("You are good!");
-
-  //   alert("Shit happens");
-}
-
-let playground = document.getElementById("playground");
-
-let playBtn = document.getElementById("playBtn");
-let commitBtn = document.getElementById("commitBtn");
-let nextBtn = document.getElementById("nextBtn");
+/*Concentration features
+====================*/
 
 let concentrationBtn = document.getElementById("concentrationBtn");
-
+let backToFullMode = document.getElementById("backToFullMode");
 let header = document.getElementById("header");
 let footer = document.getElementById("footer");
 
-let userAnswer = document.getElementById("userAnswer");
+let concentrationMode = function () {
+  header.style.display = "none";
+  footer.style.display = "none";
+  document.getElementById("main").style.margin = "40px auto";
+  backToFullMode.style.visibility = "visible";
+};
 
-playBtn.addEventListener("click", function () {
-  //   alert("it works");
-  playground.innerHTML = Math.floor(Math.random() * 100);
-  userAnswer.style.visibility = "visible";
-  playBtn.style.display = "none";
-  commitBtn.style.display = "inline-block";
+backToFullMode.addEventListener("click", function () {
+  concentrationMode = false;
+  header.style.display = "block";
+  footer.style.display = "block";
+  document.getElementById("main").style.margin = "0px auto";
+  backToFullMode.style.visibility = "hidden";
 });
+// function concetrationSwitcher() {
+//   if (concentrationMode == false) {
+//   }
+// }
+/*===================*/
 
-userAnswer.addEventListener("change", function () {
-  playBtn.innerHTML = "Commit Answer";
-});
-
-concentrationBtn.addEventListener("click", function () {
-  concentrationMode = true;
-  header.style.visibility = "hidden";
-  footer.style.visibility = "hidden";
-});
-
-// function start
+// playBtn.addEventListener("click", function () {}); //answerCommited(userAnswer.value)
+// function answerCommited() {
+//   /*if (answerStr == "100") alert("guci");
+//   else alert("soso");*/
+//   alert(userAnswer.value);
+// }
