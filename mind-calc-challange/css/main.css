@@ -27,6 +27,8 @@
   font-weight: 600;
   color: white;
   border: 0;
+
+  cursor: pointer;
 }
 
 .game-button:hover {
@@ -55,10 +57,38 @@
   transform: translateY(-100%);
   width: 100%;
 
+  cursor: pointer;
+
   visibility: hidden;
 }
 
 #backToFullMode:hover {
   cursor: pointer;
   text-decoration: underline;
+}
+
+/*Close buttons
+===================*/
+.closeWinBtn {
+  display: block;
+  height: 50px;
+  width: 100px;
+  margin: 20px auto;
+
+  border: 0;
+  border-radius: 5px;
+
+  font-size: 16px;
+}
+
+.closeWinBtn:hover {
+  background-color: #9005e6;
+
+  transition: background 0.2s linear;
+
+  cursor: pointer;
+}
+
+#settingsTable {
+  font-size: 18px;
 }

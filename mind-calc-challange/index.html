@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="eng">
 
 <head>
     <meta charset="UTF-8">
@@ -8,35 +8,83 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 
-<body lang="eng">
-    <header id="header">
-        <h1>Mind Calc Challenge</h1>
-
-        <div id="rules">
-            Game Rules
-            <button id="concentrationBtn" title="Concentration mode" onclick="concentrationMode()">C</button>
-        </div>
-
+<body>
+    <header>
+        <h1 title="click to see rules">Mind Calc Challenge</h1>
+        <button id="concentrationBtn" title="Concentration mode">C</button>
+        <img id="settingsGear" src="materials/settings.svg" title="Settings" alt="settings button">
     </header>
     <main id="main">
+        <progress max="100" value="0"></progress>
         <div id="playground">
             --
         </div>
         <input type="text" name="userAnswer" id="userAnswer" placeholder="answer" autocomplete="off"
             onkeyup="this.value = this.value.replace (/[^0-9+]/, '')">
 
-        <button id="playBtn" class="game-button" onclick="gameStarted()">Play</button>
-        <button id="nextBtn" class="game-button" onclick="nextQuestion()">Next</button>
-        <button id="commitBtn" class="game-button" onclick="answerCommited()">Commit Answer</button>
+        <button id="playBtn" class="game-button">Play</button>
+        <button id="nextBtn" class="game-button">Next</button>
+        <button id="commitBtn" class="game-button">Commit Answer</button>
 
     </main>
 
-    <footer id="footer">
-        <a href="https://github.com/maxeleron" id="ownerGitHub">
+    <footer>
+        <a href="https://github.com/maxeleron" id="ownersGitHub">
             My GitHub accaunt
         </a>
 
     </footer>
+    <div id="rulesWindow">
+        <h2>Game Rules</h2>
+
+        <button id="closeRulesWindow" class="closeWinBtn">Close</button>
+    </div>
+    <div id="settingsWindow">
+        <h2>Settings</h2>
+        <table id="settingsTable">
+            <tr>
+                <td>Amount of questions</td>
+                <td><input type="number" name="" id="" value="10"></td>
+            </tr>
+            <tr>
+                <td colspan="2">Colors and values</td>
+            </tr>
+            <tr id="1RuleRow">
+                <td></td>
+                <td><input type="number" name="" id="" value="+2"></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="hintsCheckbox">Disable hints:</label>
+                </td>
+                <td>
+                    <input type="checkbox" name="" id="hintsCheckbox" value="unchecked">
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="progressCheckbox">Disable hints:</label>
+                </td>
+                <td>
+                    <input type="checkbox" name="" id="progressCheckbox" value="unchecked">
+                </td>
+            </tr>
+
+        </table>
+
+        <button id="saveLocalSettings"></button>
+
+        <button id="closeSettingsWindow" class="closeWinBtn">Close</button>
+    </div>
+
+
     <a id="backToFullMode">Back to full version</a>
 
     <script src="js/mind-calc-engine.js"></script>

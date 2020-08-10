@@ -26,12 +26,28 @@ header {
   background-color: #eee;
   padding: 10px 30px;
 }
+h1,
+#settingsGear {
+  display: inline-block;
+  height: 45px;
+  font-size: 30px;
+
+  cursor: pointer;
+}
+
 /*Main layout
 ================*/
 main {
   /*position of main*/
   width: 50%;
   min-width: 600px;
+  /*width: 600px;
+  height: 600px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);*/
 
   display: flex;
   flex-direction: column;
@@ -61,4 +77,34 @@ footer {
   z-index: 1;
   height: 150px;
   margin-top: -40px;
+}
+
+/*Hidden windows
+===================*/
+#rulesWindow,
+#settingsWindow {
+  display: none;
+  width: 50%;
+  min-width: 600px;
+  height: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+
+  box-shadow: 0 0 60px black;
+  border-radius: 18px;
+  background: #d1d1d1;
+
+  overflow: hidden;
+
+  padding: 10px;
+  text-align: center;
+}
+
+/*Progress bar styling
+=========================*/
+progress {
+  display: none;
 }

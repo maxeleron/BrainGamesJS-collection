@@ -2,25 +2,71 @@
 /*Concentration features
 ====================*/
 
-let concentrationBtn = document.getElementById("concentrationBtn");
-let backToFullMode = document.getElementById("backToFullMode");
-let header = document.getElementById("header");
-let footer = document.getElementById("footer");
+const concentrationBtn = document.getElementById("concentrationBtn");
+const backToFullMode = document.getElementById("backToFullMode");
+const header = document.querySelector("header");
+const footer = document.querySelector("footer");
+const main = document.querySelector("main");
 
-let concentrationMode = function () {
+/*Concentration mode functionality - starts*/
+concentrationBtn.onclick = function () {
   header.style.display = "none";
   footer.style.display = "none";
-  document.getElementById("main").style.margin = "40px auto";
+  main.style.margin = "60px auto";
   backToFullMode.style.visibility = "visible";
 };
 
-backToFullMode.addEventListener("click", function () {
-  concentrationMode = false;
+backToFullMode.onclick = function () {
   header.style.display = "block";
   footer.style.display = "block";
-  document.getElementById("main").style.margin = "0px auto";
+  main.style.margin = "0px auto";
   backToFullMode.style.visibility = "hidden";
-});
+};
+/*ends - concentration mode functionality */
+
+/*Hidden windows (rules and settings) functionality - starts*/
+//Getting hidden windows
+const rulesWindow = document.getElementById("rulesWindow");
+const settingsWindow = document.getElementById("settingsWindow");
+
+//Getting entries to windows
+const rulesEntry = document.querySelector("h1");
+const settingsEntry = document.getElementById("settingsGear");
+
+//Getting close buttons (for windows)
+const closeRulesWindow = document.getElementById("closeRulesWindow");
+const closeSettingsWindow = document.getElementById("closeSettingsWindow");
+
+//Declaring functions to open and close these windows
+function openUiWindow(windowName) {
+  windowName.style.display = "block";
+}
+function closeUiWindow(windowName) {
+  windowName.style.display = "none";
+}
+
+//Adding open events on clicks
+rulesEntry.onclick = function () {
+  openUiWindow(rulesWindow);
+};
+
+settingsEntry.onclick = function () {
+  openUiWindow(settingsWindow);
+};
+
+//Adding open events on clicks
+closeRulesWindow.onclick = function () {
+  closeUiWindow(rulesWindow);
+};
+
+closeSettingsWindow.onclick = function () {
+  closeUiWindow(settingsWindow);
+};
+
+/*.onclick = openUiWindow(settingsWindow);*/
+
+/*ends - hidden windows (rules and settings) functionality*/
+
 // function concetrationSwitcher() {
 //   if (concentrationMode == false) {
 //   }

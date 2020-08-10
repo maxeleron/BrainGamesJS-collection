@@ -1,26 +1,25 @@
 "use strict";
 
-let playground = document.getElementById("playground");
+const playground = document.getElementById("playground");
 
-let playBtn = document.getElementById("playBtn");
-let commitBtn = document.getElementById("commitBtn");
-let nextBtn = document.getElementById("nextBtn");
+const userAnswer = document.getElementById("userAnswer");
 
-let userAnswer = document.getElementById("userAnswer");
+const progressBar = document.getElementById("progressBar");
 
 let userAnswersArr = [];
 let taskList = [];
 let currentUserTaskId = 0;
+let taskAmount = 10;
 
-function generateTaskList(taskAmount) {
+function generateTaskList() {
   taskList = [];
   for (let i = 0; i < taskAmount; i++) {
     taskList.push(Math.floor(Math.random() * 100));
   }
 }
 
-function gameStarted() {
-  generateTaskList(5);
+function startGame() {
+  generateTaskList(taskAmount);
   //playground.innerHTML = taskList[currentUserTaskId];
   userAnswer.style.visibility = "visible";
   playground.innerHTML = taskList[currentUserTaskId];
@@ -34,38 +33,45 @@ function gameStarted() {
 
 function checkAnswer() {
   let correctAnswersAmount = 0;
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < taskAmount; i++) {
     if (userAnswersArr[i] - 3 == taskList[i]) {
       correctAnswersAmount++;
     }
   }
-  playground.innerHTML = "You earned " + (correctAnswersAmount / 5) * 100 + "%";
+  playground.innerHTML =
+    "You earned " + (correctAnswersAmount / taskAmount) * 100 + "%";
   taskList = [];
 }
 
 function nextQuestion() {
+  if (userAnswer.value == "") {
+    return;
+  }
+
   userAnswersArr.push(+userAnswer.value);
   //counting and displaying next question
   currentUserTaskId++;
   playground.innerHTML = taskList[currentUserTaskId];
   userAnswer.value = "";
+  userAnswer.focus();
 
-  if (currentUserTaskId == 4) {
-    playground.innerHTML = taskList[4];
+  if (currentUserTaskId == taskAmount - 1) {
+    playground.innerHTML = taskList[taskAmount - 1];
     nextBtn.style.display = "none";
     commitBtn.style.display = "inline-block";
   }
 }
 
-function answerCommited() {
+function commitAnswer() {
   //playground.innerHTML = taskList[0];
+  userAnswersArr.push(+userAnswer.value);
   userAnswer.style.visibility = "hidden";
   playBtn.style.display = "inline-block";
   commitBtn.style.display = "none";
   checkAnswer();
 
   userAnswer.value = "";
-  resetGame();
+  //resetGame();
   playBtn.focus();
 }
 
