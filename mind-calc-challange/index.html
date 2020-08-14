@@ -6,6 +6,7 @@
     <title>MCC</title>
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" href="materials/favicon.ico">
 </head>
 
 <body>
@@ -15,24 +16,27 @@
         <img id="settingsGear" src="materials/settings.svg" title="Settings" alt="settings button">
     </header>
     <main id="main">
-        <progress max="100" value="0"></progress>
         <div id="playground">
             --
         </div>
-        <input type="text" name="userAnswer" id="userAnswer" placeholder="answer" autocomplete="off"
+        <input type="text" name="userAnswer" id="userAnswer" placeholder="answer" autocomplete="off" maxlength="3"
             onkeyup="this.value = this.value.replace (/[^0-9+]/, '')">
 
         <button id="playBtn" class="game-button">Play</button>
         <button id="nextBtn" class="game-button">Next</button>
         <button id="commitBtn" class="game-button">Commit Answer</button>
 
+        <progress max="100" value="0"></progress>
     </main>
 
     <footer>
-        <a href="https://github.com/maxeleron" id="ownersGitHub">
-            My GitHub accaunt
+        <a href="mailto:maxeleron@gmail.com" id="ownersMail" title="My Mail">
+            <img src="materials/gmail_icon.png" alt="Mail link">
         </a>
 
+        <a href="https://github.com/maxeleron" id="ownersGitHub" title="My GitHub accaunt">
+            <img src="materials/GitHub-Mark-64px.png" alt="GitHub profile link">
+        </a>
     </footer>
     <div id="rulesWindow">
         <h2>Game Rules</h2>
@@ -61,19 +65,19 @@
 
             <tr>
                 <td>
-                    <label for="hintsCheckbox">Disable hints:</label>
+                    <label for="hintsCheckbox">Turn ON / OFF hints:</label>
                 </td>
                 <td>
-                    <input type="checkbox" name="" id="hintsCheckbox" value="unchecked">
+                    <input type="checkbox" name="" id="hintsCheckbox" value="checked">
                 </td>
             </tr>
 
             <tr>
                 <td>
-                    <label for="progressCheckbox">Disable hints:</label>
+                    <label for="progressCheckbox">Turn ON / OFF hints:</label>
                 </td>
                 <td>
-                    <input type="checkbox" name="" id="progressCheckbox" value="unchecked">
+                    <input type="checkbox" name="" id="progressCheckbox" value="checked">
                 </td>
             </tr>
 

@@ -7,6 +7,7 @@
 body {
   margin: 0; /*removing all margins to style*/
 
+  font-family: Roboto;
   /*styling background of a page*/
   background-color: lightgray;
 }
@@ -22,6 +23,9 @@ header {
   border-top-right-radius: 45px;
   margin-bottom: -40px;
   z-index: 1;
+
+  text-align: center;
+
   /*style of header*/
   background-color: #eee;
   padding: 10px 30px;
@@ -30,6 +34,7 @@ h1,
 #settingsGear {
   display: inline-block;
   height: 45px;
+
   font-size: 30px;
 
   cursor: pointer;
@@ -73,10 +78,22 @@ footer {
   background-color: #bbb;
   border-bottom-left-radius: 45px;
   border-bottom-right-radius: 45px;
-  padding: 40px 30px 10px;
+  padding: 55px 20px 0px;
   z-index: 1;
-  height: 150px;
+  height: 105px;
   margin-top: -40px;
+
+  text-align: center;
+}
+
+footer a {
+  text-decoration: none;
+}
+
+footer a img {
+  /* padding-right: 50px;
+  padding-left: 50px; */
+  height: 40px;
 }
 
 /*Hidden windows
@@ -101,10 +118,4 @@ footer {
 
   padding: 10px;
   text-align: center;
-}
-
-/*Progress bar styling
-=========================*/
-progress {
-  display: none;
 }

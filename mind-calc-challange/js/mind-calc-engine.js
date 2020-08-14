@@ -4,7 +4,7 @@ const playground = document.getElementById("playground");
 
 const userAnswer = document.getElementById("userAnswer");
 
-const progressBar = document.getElementById("progressBar");
+const progressBar = document.querySelector("progress");
 
 let userAnswersArr = [];
 let taskList = [];
@@ -28,6 +28,9 @@ function startGame() {
   playBtn.style.display = "none";
   nextBtn.style.display = "inline-block";
 
+  //Display Progress Bar
+  progressBar.style.display = "inline-block";
+
   userAnswer.focus();
 }
 
@@ -44,6 +47,14 @@ function checkAnswer() {
 }
 
 function nextQuestion() {
+  //dont get empty stiring from user
+  if (userAnswer.value == "") {
+    userAnswer.focus();
+    return;
+  }
+
+  progressBar.value = (currentUserTaskId + 1) * 10; //Math.floor(((currentUserTaskId + 1) / taskAmount) * 100);
+
   if (userAnswer.value == "") {
     return;
   }
@@ -63,15 +74,19 @@ function nextQuestion() {
 }
 
 function commitAnswer() {
-  //playground.innerHTML = taskList[0];
+  //dont accept empty stiring
+  if (userAnswer.value == "") {
+    userAnswer.focus();
+    return;
+  }
+
   userAnswersArr.push(+userAnswer.value);
   userAnswer.style.visibility = "hidden";
   playBtn.style.display = "inline-block";
   commitBtn.style.display = "none";
   checkAnswer();
 
-  userAnswer.value = "";
-  //resetGame();
+  resetGame();
   playBtn.focus();
 }
 
@@ -79,6 +94,9 @@ function resetGame() {
   userAnswersArr = [];
   taskList = [];
   currentUserTaskId = 0;
+  userAnswer.value = "";
+  progressBar.value = "0";
+  progressBar.style.display = "none";
 }
 
 /*function checkAnswer(answerStr) {
