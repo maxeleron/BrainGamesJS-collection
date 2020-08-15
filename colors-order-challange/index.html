@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="eng">
+
+<head>
+    <meta charset="UTF-8">
+    <title>COC</title>
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" href="materials/favicon.ico">
+</head>
+
+<body>
+    <header>
+        <h1 title="click to see rules">Colors Order Challange</h1>
+        <img id="settingsGear" src="materials/settings.svg" title="Settings" alt="settings button">
+    </header>
+    <main id="main">
+        <input type="number" value="5" max="36" min="2">
+        <select name="" id="">
+            <option value="small">Small</option>
+            <option value="medium">Medium</option>
+            <option value="lagre">Large</option>
+        </select>
+        <div id="playground">
+            --
+        </div>
+
+        <button id="playBtn" class="game-button">Play</button>
+        <button id="rememberedBtn" class="game-button">I remembered</button>
+        <button id="commitBtn" class="game-button">Commit Answer</button>
+
+
+    </main>
+
+    <footer>
+        <a href="mailto:maxeleron@gmail.com" id="ownersMail" title="My Mail">
+            <img src="materials/gmail_icon.png" alt="Mail link">
+        </a>
+
+        <a href="https://github.com/maxeleron" id="ownersGitHub" title="My GitHub accaunt">
+            <img src="materials/GitHub-Mark-64px.png" alt="GitHub profile link">
+        </a>
+    </footer>
+    <div id="rulesWindow">
+        <h2>Game Rules</h2>
+
+        <button id="closeRulesWindow" class="closeWinBtn">Close</button>
+    </div>
+
+
+    <script src="js/colors-order-engine.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

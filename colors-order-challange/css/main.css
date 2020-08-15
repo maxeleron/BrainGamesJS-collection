@@ -1,0 +1,20 @@
+/*Tile size classes (choosing by Select tag)
+==============*/
+.smallTile {
+  /* display: inline-block; */
+  display: block; /*For tests*/
+  height: 50px;
+  width: 50px;
+}
+
+.mediumTile {
+  display: inline-block;
+  height: 100px;
+  width: 100px;
+}
+
+.largeTile {
+  display: inline-block;
+  height: 150px;
+  width: 150px;
+}

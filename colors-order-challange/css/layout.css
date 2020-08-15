@@ -1,0 +1,115 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0; /*removing all margins to style*/
+
+  font-family: Roboto;
+  /*styling background of a page*/
+  background-color: darkgray;
+}
+/*Header layout
+================*/
+header {
+  /*position of header*/
+  height: 120px;
+  width: 50%;
+  min-width: 600px;
+  margin: 30px auto 0px;
+  border-top-left-radius: 45px;
+  border-top-right-radius: 45px;
+  margin-bottom: -40px;
+  z-index: 1;
+
+  text-align: center;
+
+  /*style of header*/
+  background-color: #eee;
+  padding: 10px 30px;
+}
+h1,
+#settingsGear {
+  display: inline-block;
+  height: 45px;
+
+  font-size: 30px;
+
+  cursor: pointer;
+}
+
+/*Main layout
+================*/
+main {
+  /*position of main*/
+  min-height: 300px;
+  width: 50%;
+  min-width: 600px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  z-index: 2;
+  position: relative;
+  background-color: #fff;
+
+  border-radius: 45px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  padding: 35px 20px;
+
+  text-align: center;
+}
+
+/*Footer
+================*/
+footer {
+  width: 50%;
+  min-width: 600px;
+  margin: 20px auto 0px;
+  background-color: #888;
+  border-bottom-left-radius: 45px;
+  border-bottom-right-radius: 45px;
+  padding: 55px 20px 0px;
+  z-index: 1;
+  height: 105px;
+  margin-top: -40px;
+
+  text-align: center;
+}
+
+footer a {
+  text-decoration: none;
+}
+
+footer a img {
+  /* padding-right: 50px;
+  padding-left: 50px; */
+  height: 40px;
+}
+
+/*Hidden windows
+===================*/
+#rulesWindow,
+#settingsWindow {
+  display: none;
+  width: 50%;
+  min-width: 600px;
+  height: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+
+  box-shadow: 0 0 60px black;
+  border-radius: 18px;
+  background: #d1d1d1;
+
+  overflow: hidden;
+
+  padding: 10px;
+  text-align: center;
+}
