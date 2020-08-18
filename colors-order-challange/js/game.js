@@ -1,1 +1,4 @@
 "use strict";
+generateGameCollorsArr();
+
+generateTiles();

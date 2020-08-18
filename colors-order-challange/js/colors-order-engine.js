@@ -22,13 +22,13 @@ const COLORS_ARR = [
   "#CC9900",
   "#CC6600",
   "#CC6633",
-  "#FF0000" /*Red */,
-  "#FF6666" /*Light red */,
+  "#FF0000",
+  "#FF6666",
   "#993333",
   "#CC3366",
   "#FF0099",
   "#CC6699",
-  "#FF33FF" /*Pink */,
+  "#FF33FF",
   "#CC33CC",
   "#9900CC",
   "#9933FF",
@@ -55,6 +55,9 @@ const COLORS_ARR = [
   "#999900",
   "#999999",
 ];
+console.log(COLORS_ARR);
+/*Function that gets random element from array */
+function randomElement(params) {}
 
 /*User preferences */
 /*let userTileAmount = null;
@@ -73,10 +76,13 @@ const playground = document.getElementById("playground");
 function generateGameCollorsArr() {
   playground.innerHTML = "";
 
+  /*for (let i = 0; i < userTileAmount; i++) {
+    const element = array[i];
+  }*/
   userColorsArr = COLORS_ARR;
-  for (let i = COLORS_ARR.length; i > userTileAmount; i--) {
+  /*for (let i = COLORS_ARR.length; i > userTileAmount; i--) {
     delete userColorsArr[i];
-  }
+  }*/
 }
 
 function generateTiles() {
@@ -84,10 +90,15 @@ function generateTiles() {
     gameTilesArr[i] = document.createElement("div");
     playground.append(gameTilesArr[i]);
     gameTilesArr[i].id = i;
-    tileStylesSetter(gameTilesArr[i], userTileSize, userColorsArr[i]);
+
+    let randomColor = Math.floor(Math.random() * userColorsArr.length);
+    console.log(randomColor);
+    tileStylesSetter(gameTilesArr[i], userTileSize, userColorsArr[randomColor]);
+
+    /*userColorsArr = userColorsArr
+      .slice(0, randomColor + 1)
+      .concat(userColorsArr.slice(randomColor + 1, userColorsArr.length));*/
   }
 }
 
-generateGameCollorsArr();
-
-generateTiles();
+function draggingInOrder() {}
