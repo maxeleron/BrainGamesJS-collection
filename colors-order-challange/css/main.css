@@ -24,3 +24,30 @@
   height: 150px;
   width: 150px;
 }
+
+/* Game buttons
+========================*/
+.game-button {
+  height: 100px;
+  width: 200px;
+  margin: 20px auto;
+
+  background-color: #fc3a51;
+  font-size: 30px;
+  font-weight: 600;
+  color: white;
+  border: 0;
+
+  cursor: pointer;
+}
+
+.game-button:hover {
+  background-color: #7a1fef;
+
+  transition: background 0.2s linear;
+}
+
+#commitBtn,
+#rememberedBtn {
+  display: none;
+}

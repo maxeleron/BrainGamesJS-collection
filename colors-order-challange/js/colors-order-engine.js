@@ -55,7 +55,7 @@ const COLORS_ARR = [
   "#999900",
   "#999999",
 ];
-console.log(COLORS_ARR);
+
 /*Function that gets random element from array */
 function randomElement(params) {}
 
@@ -68,6 +68,7 @@ let userTileSize = "small"; //just for tests
 /*Game elements */
 let userColorsArr = [];
 let gameTilesArr = [];
+let shuffledTilesArr = [];
 
 /*DOM elements */
 const playground = document.getElementById("playground");
@@ -88,7 +89,6 @@ function generateGameCollorsArr() {
 function generateTiles() {
   for (let i = 0; i < userTileAmount; i++) {
     gameTilesArr[i] = document.createElement("div");
-    playground.append(gameTilesArr[i]);
     gameTilesArr[i].id = i;
 
     let randomColor = Math.floor(Math.random() * userColorsArr.length);
@@ -102,3 +102,27 @@ function generateTiles() {
 }
 
 function draggingInOrder() {}
+
+function shuffleTiles() {
+  shuffledTilesArr = gameTilesArr;
+  for (let i = shuffledTilesArr.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [shuffledTilesArr[i], shuffledTilesArr[j]] = [
+      shuffledTilesArr[j],
+      shuffledTilesArr[i],
+    ];
+  }
+}
+
+function showTiles(tilesArr) {
+  for (let i = 0; i < tilesArr.length; i++) {
+    playground.append(tilesArr[i]);
+  }
+}
+
+function showTiles1(tilesArr) {
+  playground.innerHTML = "";
+  for (let i = 0; i < tilesArr.length; i++) {
+    playground.append(tilesArr[i]);
+  }
+}
