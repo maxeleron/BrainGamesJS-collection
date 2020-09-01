@@ -11,18 +11,21 @@
 
 <body>
     <header>
-        <h1 title="click to see rules">Colors Order Challange</h1>
+        <h1>Colors Order Challange</h1>
         <img id="settingsGear" src="materials/settings.svg" title="Settings" alt="settings button">
     </header>
     <main id="main">
-        <input type="number" value="5" max="36" min="2">
-        <select name="" id="">
-            <option value="small">Small</option>
-            <option value="medium">Medium</option>
-            <option value="lagre">Large</option>
-        </select>
+        <div id="gameRules">
+            Game is simple:
+            <ol>
+                <li>Remember order of color tiles</li>
+                <li>Restore order after shufling</li>
+                <li>More options in settings</li>
+            </ol>
+        </div>
+
         <div id="playground">
-            --
+
         </div>
 
         <button id="playBtn" class="game-button">Play</button>
@@ -41,16 +44,25 @@
             <img src="materials/GitHub-Mark-64px.png" alt="GitHub profile link">
         </a>
     </footer>
-    <div id="rulesWindow">
-        <h2>Game Rules</h2>
 
-        <button id="closeRulesWindow" class="closeWinBtn">Close</button>
+    <div id="settingsWindow">
+        <h2>Settings</h2>
+        <input type="number" id="tilesAmount" value=`${8}` max="36" min="2">
+        <select id="tileSize">
+            <option value="small">Small</option>
+            <option value="medium">Medium</option>
+            <option value="lagre">Large</option>
+        </select>
+
+        <button id="saveLocalSettings">Save Settings</button>
+
+        <button id="closeSettingsWindow" class="closeWinBtn">Close</button>
     </div>
 
-
+    <script src="js/main.js" defer></script>
     <script src="js/colors-order-engine.js" defer></script>
     <script src="js/game.js" defer></script>
-    <script src="js/main.js" defer></script>
+
 </body>
 
 </html>

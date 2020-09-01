@@ -25,7 +25,7 @@ A bench of javascript-based browser games, that has next purposes
 
 ## 2. Colors Order Challange
 
-**Colors Order Challenge** - is a simple graphic game where player should use their memory to memorize order of colors boxes _(for example: first colors shown [~~green~~, ~~red~~, ~~yellow~~], after shuffle collors could be displayed [~~yellow~~, ~~green~~, ~~red~~], after User has to manipulate colors boxes (with drag&drop) to recover colors` order)_
+**Colors Order Challenge** - is a simple graphic game where player should use their memory to memorize order of colors boxes _(for example: first colors shown [**green**, **red**, **yellow**], after shuffle collors could be displayed [**yellow**, **green**, **red**], after User has to manipulate colors boxes (with drag&drop) to recover colors` order)_
 
 **Features (Colors Order)**:
 

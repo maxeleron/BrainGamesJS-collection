@@ -28,18 +28,23 @@ header {
 
   /*style of header*/
   background-color: #eee;
-  padding: 10px 30px;
+  padding: 5px 30px;
 }
-h1,
-#settingsGear {
+h1 {
   display: inline-block;
-  height: 45px;
-
+  height: 55px;
   font-size: 30px;
+  margin-left: 60px;
+}
 
+#settingsGear {
+  height: 45px;
+  display: inline-block;
+
+  float: right;
+  margin-top: 15px;
   cursor: pointer;
 }
-
 /*Main layout
 ================*/
 main {

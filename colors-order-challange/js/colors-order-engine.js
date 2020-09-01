@@ -62,8 +62,8 @@ function randomElement(params) {}
 /*User preferences */
 /*let userTileAmount = null;
 let userTileSize = null;*/
-let userTileAmount = 5; //just for tests
-let userTileSize = "small"; //just for tests
+let userTileAmount = settingsObject.tilesAmount; //just for tests
+let userTileSize = settingsObject.tileSize; //just for tests
 
 /*Game elements */
 let userColorsArr = [];

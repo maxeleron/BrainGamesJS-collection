@@ -14,9 +14,10 @@
 }
 
 .mediumTile {
-  display: inline-block;
+  display: block;
   height: 100px;
   width: 100px;
+  box-shadow: 20px black;
 }
 
 .largeTile {
@@ -37,6 +38,7 @@
   font-weight: 600;
   color: white;
   border: 0;
+  border-radius: 4px;
 
   cursor: pointer;
 }
