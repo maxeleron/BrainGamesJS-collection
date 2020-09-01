@@ -2,6 +2,7 @@
 *:before,
 *:after {
   box-sizing: border-box;
+  color: #435058;
 }
 
 body {
@@ -9,7 +10,7 @@ body {
 
   font-family: Roboto;
   /*styling background of a page*/
-  background-color: darkgray;
+  background-color: #f1f2ee;
 }
 /*Header layout
 ================*/
@@ -27,7 +28,7 @@ header {
   text-align: center;
 
   /*style of header*/
-  background-color: #eee;
+  background-color: #bfb7b6;
   padding: 5px 30px;
 }
 h1 {
@@ -39,7 +40,6 @@ h1 {
 
 #settingsGear {
   height: 45px;
-  display: inline-block;
 
   float: right;
   margin-top: 15px;
@@ -97,13 +97,12 @@ footer a img {
 
 /*Hidden windows
 ===================*/
-#rulesWindow,
 #settingsWindow {
   display: none;
   width: 50%;
   min-width: 600px;
   height: 400px;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -111,7 +110,7 @@ footer a img {
 
   box-shadow: 0 0 60px black;
   border-radius: 18px;
-  background: #d1d1d1;
+  background: #dcf763;
 
   overflow: hidden;
 

@@ -60,10 +60,11 @@ const COLORS_ARR = [
 function randomElement(params) {}
 
 /*User preferences */
-/*let userTileAmount = null;
-let userTileSize = null;*/
-let userTileAmount = settingsObject.tilesAmount; //just for tests
-let userTileSize = settingsObject.tileSize; //just for tests
+let userTileAmount = settingsObject.tilesAmount;
+let userTileSize = settingsObject.tileSize;
+// Setting ui elements up to date with settingsObject
+tilesAmountInput.value = userTileAmount;
+tilesSizeSelect.value = userTileSize;
 
 /*Game elements */
 let userColorsArr = [];
@@ -115,13 +116,6 @@ function shuffleTiles() {
 }
 
 function showTiles(tilesArr) {
-  for (let i = 0; i < tilesArr.length; i++) {
-    playground.append(tilesArr[i]);
-  }
-}
-
-function showTiles1(tilesArr) {
-  playground.innerHTML = "";
   for (let i = 0; i < tilesArr.length; i++) {
     playground.append(tilesArr[i]);
   }

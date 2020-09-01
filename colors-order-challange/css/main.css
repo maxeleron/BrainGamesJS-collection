@@ -4,19 +4,21 @@
 .mediumTile,
 .largeTile {
   margin: 5px auto;
+  border-radius: 3px;
 }
 
 .smallTile {
   /* display: inline-block; */
   display: block; /*For tests*/
-  height: 75px;
-  width: 75px;
+  height: 100px;
+  width: 100px;
 }
 
 .mediumTile {
   display: block;
-  height: 100px;
-  width: 100px;
+  height: 150px;
+  /* width: 150px; */
+  width: 100%;
   box-shadow: 20px black;
 }
 
@@ -51,5 +53,9 @@
 
 #commitBtn,
 #rememberedBtn {
+  display: none;
+}
+
+#saveLocalSettings {
   display: none;
 }

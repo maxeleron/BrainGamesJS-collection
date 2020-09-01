@@ -29,5 +29,25 @@ settingsBtn.addEventListener("click", () => {
 closeSettingsWindow.addEventListener("click", () => {
   settingsWindow.style.display = "none";
 });
+
+//Settings ui elements
+const tilesAmountInput = document.getElementById("tilesAmount");
+const tilesSizeSelect = document.getElementById("tileSize");
+const saveSettingsBtn = document.getElementById("saveLocalSettings");
+
+tilesAmountInput.addEventListener("change", () => {
+  saveSettingsBtn.style.display = "block";
+});
+tilesSizeSelect.addEventListener("change", (event) => {
+  saveSettingsBtn.style.display = "block";
+});
+
 /*==============
 end:Settings*/
+
+//Global key events
+window.addEventListener("keydown", (event) => {
+  switch('')
+
+  if (event.keyCode == 27) closeSettingsWindow.click(); //Esc
+});
