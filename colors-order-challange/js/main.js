@@ -47,7 +47,7 @@ end:Settings*/
 
 //Global key events
 window.addEventListener("keydown", (event) => {
-  switch('')
+  //switch('')
 
   if (event.keyCode == 27) closeSettingsWindow.click(); //Esc
 });

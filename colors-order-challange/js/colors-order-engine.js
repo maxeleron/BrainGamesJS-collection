@@ -74,35 +74,23 @@ let shuffledTilesArr = [];
 /*DOM elements */
 const playground = document.getElementById("playground");
 
-/*Function that generates array with chosen colors */
-function generateGameCollorsArr() {
-  playground.innerHTML = "";
-
-  /*for (let i = 0; i < userTileAmount; i++) {
-    const element = array[i];
-  }*/
-  userColorsArr = COLORS_ARR;
-  /*for (let i = COLORS_ARR.length; i > userTileAmount; i--) {
-    delete userColorsArr[i];
-  }*/
-}
-
 function generateTiles() {
   for (let i = 0; i < userTileAmount; i++) {
     gameTilesArr[i] = document.createElement("div");
     gameTilesArr[i].id = i;
 
-    let randomColor = Math.floor(Math.random() * userColorsArr.length);
-    console.log(randomColor);
-    tileStylesSetter(gameTilesArr[i], userTileSize, userColorsArr[randomColor]);
+    let randomColor = Math.floor(Math.random() * COLORS_ARR.length);
+    //dublicate protection cycle
+    while (userColorsArr.includes(COLORS_ARR[randomColor])) {
+      console.log("hi, I changed");
+      randomColor = Math.floor(Math.random() * COLORS_ARR.length);
+    }
+    userColorsArr.push(COLORS_ARR[randomColor]);
 
-    /*userColorsArr = userColorsArr
-      .slice(0, randomColor + 1)
-      .concat(userColorsArr.slice(randomColor + 1, userColorsArr.length));*/
+    console.log(randomColor);
+    tileStylesSetter(gameTilesArr[i], userTileSize, COLORS_ARR[randomColor]);
   }
 }
-
-function draggingInOrder() {}
 
 function shuffleTiles() {
   shuffledTilesArr = gameTilesArr;
@@ -118,5 +106,29 @@ function shuffleTiles() {
 function showTiles(tilesArr) {
   for (let i = 0; i < tilesArr.length; i++) {
     playground.append(tilesArr[i]);
+  }
+}
+
+function clickCreateInputHandler() {
+  let answerInput = document.createElement("input");
+  //document.getElementById(gameTilesArr[i].id).appendChild(answerInput);
+  this.appendChild(answerInput);
+  answerInput.setAttribute("id", "input" + this.id);
+  answerInput.setAttribute("type", "text");
+
+  this.removeEventListener("click", clickCreateInputHandler);
+}
+
+function answersAcceptInputs() {
+  alert("I am called");
+  for (let i = 0; i < gameTilesArr.length; i++) {
+    document
+      .getElementById(gameTilesArr[i].id) //style.height = "200px";
+      .addEventListener("click", clickCreateInputHandler);
+    //   console.log("I am trying to append Child " + i);
+
+    // });
+
+    //  console.log("I am trying to append Child " + i);
   }
 }
