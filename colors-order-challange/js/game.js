@@ -18,10 +18,13 @@ playBtn.addEventListener("click", () => {
 
 rememberedBtn.addEventListener("click", () => {
   answersAcceptInputs();
-  /*shuffleTiles();
-  showTiles(gameTilesArr);*/
+  shuffleTiles();
+  showTiles(gameTilesArr);
 
   //hiding rememberedBtn and displaying commit answerBtn
   rememberedBtn.style.display = "none";
   commitBtn.style.display = "block";
 });
+
+// playBtn.click();
+// rememberedBtn.click();

@@ -12,6 +12,7 @@
   display: block; /*For tests*/
   height: 100px;
   width: 100px;
+  font-size: 75px;
 }
 
 .mediumTile {
@@ -19,7 +20,8 @@
   height: 150px;
   /* width: 150px; */
   width: 100%;
-  box-shadow: 20px black;
+
+  font-size: 125px;
 }
 
 .largeTile {
@@ -59,4 +61,16 @@
 
 #saveLocalSettings {
   display: none;
+}
+
+.answerInput {
+  outline: none;
+  font-size: inherit;
+  width: inherit;
+  background: inherit;
+  text-align: center;
+  color: white;
+  border: 0;
+
+  text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
 }

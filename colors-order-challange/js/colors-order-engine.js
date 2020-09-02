@@ -87,6 +87,8 @@ function generateTiles() {
     }
     userColorsArr.push(COLORS_ARR[randomColor]);
 
+    gameTilesArr[i].classList.add("colorTileDraggable");
+
     console.log(randomColor);
     tileStylesSetter(gameTilesArr[i], userTileSize, COLORS_ARR[randomColor]);
   }
@@ -110,25 +112,27 @@ function showTiles(tilesArr) {
 }
 
 function clickCreateInputHandler() {
-  let answerInput = document.createElement("input");
-  //document.getElementById(gameTilesArr[i].id).appendChild(answerInput);
+  let answerInput = document.createElement("select");
   this.appendChild(answerInput);
   answerInput.setAttribute("id", "input" + this.id);
-  answerInput.setAttribute("type", "text");
+  answerInput.setAttribute("type", "number");
+
+  answerInput.setAttribute("min", 1);
+  answerInput.setAttribute("max", gameTilesArr.length);
+
+  answerInput.classList.add("answerInput");
 
   this.removeEventListener("click", clickCreateInputHandler);
 }
 
 function answersAcceptInputs() {
-  alert("I am called");
-  for (let i = 0; i < gameTilesArr.length; i++) {
+  Sortable.create(playground, {
+    handle: ".colorTileDraggable",
+    animation: 100,
+  });
+  /*for (let i = 0; i < gameTilesArr.length; i++) {
     document
       .getElementById(gameTilesArr[i].id) //style.height = "200px";
-      .addEventListener("click", clickCreateInputHandler);
-    //   console.log("I am trying to append Child " + i);
-
-    // });
-
-    //  console.log("I am trying to append Child " + i);
-  }
+      .addEventListener("click", clickCreateSelectHandler);
+  }*/
 }
