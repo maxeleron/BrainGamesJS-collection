@@ -47,12 +47,27 @@
 
     <div id="settingsWindow">
         <h2>Settings</h2>
-        <input type="number" id="tilesAmount" max="36" min="2">
+        <label for="tileSize"> Tile size:
+            <input type="number" id="tilesAmount" max="36" min="2">
+        </label>
+
+        <label for="tileSize"> Tile size:</label>
         <select id="tileSize">
             <option value="small">Small</option>
             <option value="medium">Medium</option>
             <option value="lagre">Large</option>
         </select>
+
+        <label for="tileFormat"> Tile format:</label>
+        <select id="tileFormat">
+            <option value="narrow">Narrow</option>
+            <option value="normal">Normal</option>
+            <option value="wide">Wide</option>
+        </select>
+
+        <label for="gameRulesToggle"> Game Rules:
+            <input type="checkbox" id="gameRulesToggle" />
+        </label>
 
         <button id="saveLocalSettings">Save Settings</button>
 

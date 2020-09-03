@@ -1,33 +1,38 @@
 "use strict";
 /* Settings
 ==================*/
-/*class Settings(){
-  constructor(){
-
+class Settings {
+  constructor() {
+    if (!localStorage["settingsObject"]) {
+      this.restoreDefaults();
+    } else {
+      let parsedObj = JSON.parse(localStorage.getItem("settingsObject"));
+      this.tilesAmount = parsedObj.tilesAmount;
+      this.tileSize = parsedObj.tileSize;
+    }
   }
-  save(){
-
+  save() {
+    localStorage.setItem("settingsObject", JSON.stringify(this));
   }
-  restoreDefaults(){
-
+  restoreDefaults() {
+    this.tilesAmount = 8;
+    this.tileSize = "medium";
+    this.tileFormat = Settings.getDefaultFormat();
+    this.save();
   }
-}*/
-
-//Local Settings Object
-let settingsObject = JSON.parse(localStorage.getItem("settingsObject")) || {
-  tilesAmount: 8,
-  tileSize: "medium",
-};
-
-function restoreDefaultSettings(settingsObj) {
-  settingsObj.tilesAmount = 8;
-  settingsObj.tileSize = "medium";
-  saveUserSettings();
+  getDefaultAmount() {
+    return 5;
+  }
+  getDefaultSize() {
+    return "medium";
+  }
+  getDefaultFormat() {
+    return "wideTile";
+  }
 }
 
-const saveUserSettings = function () {
-  localStorage.setItem("settingsObject", JSON.stringify(settingsObject));
-};
+//Local Settings Object
+let settingsObject = new Settings();
 
 //Getting settings ui elements
 const settingsBtn = document.getElementById("settingsGear");
@@ -52,6 +57,13 @@ tilesAmountInput.addEventListener("change", () => {
 });
 tilesSizeSelect.addEventListener("change", (event) => {
   saveSettingsBtn.style.display = "block";
+});
+
+saveSettingsBtn.addEventListener("click", () => {
+  settingsObject.tilesAmount = tilesAmountInput.value;
+  settingsObject.tileSize = tilesSizeSelect.value;
+
+  settingsObject.save();
 });
 // Setting ui elements up to date with settingsObject
 tilesAmountInput.value = settingsObject.tilesAmount;

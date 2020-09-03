@@ -5,6 +5,8 @@ const playBtn = document.getElementById("playBtn");
 const rememberedBtn = document.getElementById("rememberedBtn");
 const commitBtn = document.getElementById("commitBtn");
 
+const gameRules = document.getElementById("gameRules");
+
 let gameTilesArr;
 
 /*DOM elements */
@@ -22,11 +24,12 @@ playBtn.addEventListener("click", () => {
   playBtn.style.display = "none";
   rememberedBtn.style.display = "block";
 
-  //hiding game rules
-  document.getElementById("gameRules").style.display = "none";
+  gameRules.innerText = "Remember order of colors below:";
 });
 
 rememberedBtn.addEventListener("click", () => {
+  gameRules.innerText = "Restore order of colors below:";
+
   gameTilesArr.enableSortable(playground);
   gameTilesArr.shuffle();
   gameTilesArr.display(playground);

@@ -51,6 +51,11 @@ class GameTilesArr {
       this[i].node.classList.remove("sortable");
     }
   }
+  /*each(func) {
+    for (let i = 0; i < this.length; i++) {
+      this.func();
+    }
+  }*/
 }
 
 /*Colors array */
