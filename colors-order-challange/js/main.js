@@ -1,6 +1,18 @@
 "use strict";
 /* Settings
 ==================*/
+/*class Settings(){
+  constructor(){
+
+  }
+  save(){
+
+  }
+  restoreDefaults(){
+
+  }
+}*/
+
 //Local Settings Object
 let settingsObject = JSON.parse(localStorage.getItem("settingsObject")) || {
   tilesAmount: 8,
@@ -41,6 +53,9 @@ tilesAmountInput.addEventListener("change", () => {
 tilesSizeSelect.addEventListener("change", (event) => {
   saveSettingsBtn.style.display = "block";
 });
+// Setting ui elements up to date with settingsObject
+tilesAmountInput.value = settingsObject.tilesAmount;
+tilesSizeSelect.value = settingsObject.tileSize;
 
 /*==============
 end:Settings*/

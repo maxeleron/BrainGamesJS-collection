@@ -1,19 +1,56 @@
 "use strict";
 
-/*Class that describes game tile (with color) */
-function tileStylesSetter(tileDom, size, color) {
-  switch (size) {
-    case "small":
-      tileDom.classList.add("smallTile");
-      break;
-    case "medium":
-      tileDom.classList.add("mediumTile");
-      break;
-    case "large":
-      tileDom.classList.add("largeTile");
-      break;
+class GameTile {
+  constructor(Id, Color, Size) {
+    this.node = document.createElement("div");
+    this.id = Id;
+
+    this.node.style.background = COLORS_ARR[Color];
+    this.node.classList.add(Size + "Tile");
   }
-  tileDom.style.background = color;
+}
+
+class GameTilesArr {
+  constructor(ElementsAmount, ElementSize) {
+    let dublicateProtectionArr = [];
+    for (let i = 0; i < ElementsAmount; i++) {
+      let randomColor = Math.floor(Math.random() * COLORS_ARR.length);
+      //dublicate protection cycle
+      while (dublicateProtectionArr.includes(COLORS_ARR[randomColor])) {
+        randomColor = Math.floor(Math.random() * COLORS_ARR.length);
+      }
+      dublicateProtectionArr.push(COLORS_ARR[randomColor]);
+
+      this[i] = new GameTile(i, randomColor, ElementSize);
+      this[i].id = i;
+    }
+    this.length = ElementsAmount;
+  }
+  display(displayField) {
+    for (let i = 0; i < this.length; i++) {
+      displayField.append(this[i].node);
+    }
+  }
+  shuffle() {
+    for (let i = this.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [this[i], this[j]] = [this[j], this[i]];
+    }
+  }
+  enableSortable(sortField) {
+    Sortable.create(sortField, {
+      handle: ".sortable",
+      animation: 120,
+    });
+    for (let i = 0; i < this.length; i++) {
+      this[i].node.classList.add("sortable");
+    }
+  }
+  disableSortable() {
+    for (let i = 0; i < this.length; i++) {
+      this[i].node.classList.remove("sortable");
+    }
+  }
 }
 
 /*Colors array */
@@ -55,84 +92,3 @@ const COLORS_ARR = [
   "#999900",
   "#999999",
 ];
-
-/*Function that gets random element from array */
-function randomElement(params) {}
-
-/*User preferences */
-let userTileAmount = settingsObject.tilesAmount;
-let userTileSize = settingsObject.tileSize;
-// Setting ui elements up to date with settingsObject
-tilesAmountInput.value = userTileAmount;
-tilesSizeSelect.value = userTileSize;
-
-/*Game elements */
-let userColorsArr = [];
-let gameTilesArr = [];
-let shuffledTilesArr = [];
-
-/*DOM elements */
-const playground = document.getElementById("playground");
-
-function generateTiles() {
-  for (let i = 0; i < userTileAmount; i++) {
-    gameTilesArr[i] = document.createElement("div");
-    gameTilesArr[i].id = i;
-
-    let randomColor = Math.floor(Math.random() * COLORS_ARR.length);
-    //dublicate protection cycle
-    while (userColorsArr.includes(COLORS_ARR[randomColor])) {
-      console.log("hi, I changed");
-      randomColor = Math.floor(Math.random() * COLORS_ARR.length);
-    }
-    userColorsArr.push(COLORS_ARR[randomColor]);
-
-    gameTilesArr[i].classList.add("colorTileDraggable");
-
-    console.log(randomColor);
-    tileStylesSetter(gameTilesArr[i], userTileSize, COLORS_ARR[randomColor]);
-  }
-}
-
-function shuffleTiles() {
-  shuffledTilesArr = gameTilesArr;
-  for (let i = shuffledTilesArr.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1));
-    [shuffledTilesArr[i], shuffledTilesArr[j]] = [
-      shuffledTilesArr[j],
-      shuffledTilesArr[i],
-    ];
-  }
-}
-
-function showTiles(tilesArr) {
-  for (let i = 0; i < tilesArr.length; i++) {
-    playground.append(tilesArr[i]);
-  }
-}
-
-function clickCreateInputHandler() {
-  let answerInput = document.createElement("select");
-  this.appendChild(answerInput);
-  answerInput.setAttribute("id", "input" + this.id);
-  answerInput.setAttribute("type", "number");
-
-  answerInput.setAttribute("min", 1);
-  answerInput.setAttribute("max", gameTilesArr.length);
-
-  answerInput.classList.add("answerInput");
-
-  this.removeEventListener("click", clickCreateInputHandler);
-}
-
-function answersAcceptInputs() {
-  Sortable.create(playground, {
-    handle: ".colorTileDraggable",
-    animation: 100,
-  });
-  /*for (let i = 0; i < gameTilesArr.length; i++) {
-    document
-      .getElementById(gameTilesArr[i].id) //style.height = "200px";
-      .addEventListener("click", clickCreateSelectHandler);
-  }*/
-}
