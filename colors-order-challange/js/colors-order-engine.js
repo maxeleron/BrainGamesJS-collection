@@ -12,24 +12,23 @@ class GameTile {
 
 class GameTilesArr {
   constructor(ElementsAmount, ElementSize) {
-    let dublicateProtectionArr = [];
+    //let dublicateProtectionArr = [];
+    let currentColorsArr = COLORS_ARR;
     for (let i = 0; i < ElementsAmount; i++) {
-      let randomColor = Math.floor(Math.random() * COLORS_ARR.length);
-      //dublicate protection cycle
-      while (dublicateProtectionArr.includes(COLORS_ARR[randomColor])) {
-        randomColor = Math.floor(Math.random() * COLORS_ARR.length);
-      }
-      dublicateProtectionArr.push(COLORS_ARR[randomColor]);
-
+      const randomColor = Math.floor(Math.random() * currentColorsArr.length);
       this[i] = new GameTile(i, randomColor, ElementSize);
+      this[i].node.id = i;
       this[i].id = i;
+
+      //removing selected color from temp array to avoid dublicates
+      currentColorsArr.splice(randomColor, 1);
     }
     this.length = ElementsAmount;
   }
   display(displayField) {
-    for (let i = 0; i < this.length; i++) {
-      displayField.append(this[i].node);
-    }
+    this.each((that) => {
+      displayField.append(that.node);
+    });
   }
   shuffle() {
     for (let i = this.length - 1; i > 0; i--) {
@@ -42,20 +41,20 @@ class GameTilesArr {
       handle: ".sortable",
       animation: 120,
     });
-    for (let i = 0; i < this.length; i++) {
-      this[i].node.classList.add("sortable");
-    }
+    this.each((that) => {
+      that.node.classList.add("sortable");
+    });
   }
   disableSortable() {
+    this.each((that) => {
+      that.node.classList.remove("sortable");
+    });
+  }
+  each(func) {
     for (let i = 0; i < this.length; i++) {
-      this[i].node.classList.remove("sortable");
+      func(this[i]);
     }
   }
-  /*each(func) {
-    for (let i = 0; i < this.length; i++) {
-      this.func();
-    }
-  }*/
 }
 
 /*Colors array */

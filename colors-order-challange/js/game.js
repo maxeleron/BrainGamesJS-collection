@@ -1,5 +1,21 @@
 "use strict";
 
+const checkAnswers = (field) => {
+  const userAnswersArr = field.childNodes;
+  let rightAnswers = 0;
+  let wrongAnswers = 0;
+  for (let i = 0; i < userAnswersArr.length; i++) {
+    if (userAnswersArr[i].id == i) {
+      userAnswersArr[i].classList.add("rightAnswer");
+      rightAnswers++;
+    } else {
+      userAnswersArr[i].classList.add("wrongAnswer");
+      wrongAnswers++;
+    }
+  }
+  console.log("right " + rightAnswers + ", wrong " + wrongAnswers);
+};
+
 //Getting Game Buttons
 const playBtn = document.getElementById("playBtn");
 const rememberedBtn = document.getElementById("rememberedBtn");
@@ -13,6 +29,7 @@ let gameTilesArr;
 const playground = document.getElementById("playground");
 
 playBtn.addEventListener("click", () => {
+  playground.innerHTML = "";
   /*Game elements */
   gameTilesArr = new GameTilesArr(
     settingsObject.tilesAmount,
@@ -36,7 +53,13 @@ rememberedBtn.addEventListener("click", () => {
   //hiding rememberedBtn and displaying commit answerBtn
   rememberedBtn.style.display = "none";
   commitBtn.style.display = "block";
+
+  window.scrollTo(0, 0);
 });
 
-// playBtn.click();
-// rememberedBtn.click();
+commitBtn.addEventListener("click", () => {
+  checkAnswers(playground);
+
+  commitBtn.style.display = "none";
+  playBtn.style.display = "block";
+});

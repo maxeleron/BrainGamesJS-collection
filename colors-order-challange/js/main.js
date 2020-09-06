@@ -3,9 +3,12 @@
 ==================*/
 class Settings {
   constructor() {
+    //if settings don`t ever saved, give settings to a user
     if (!localStorage["settingsObject"]) {
       this.restoreDefaults();
-    } else {
+    }
+    //if there are local settings implement them to current game
+    else {
       let parsedObj = JSON.parse(localStorage.getItem("settingsObject"));
       this.tilesAmount = parsedObj.tilesAmount;
       this.tileSize = parsedObj.tileSize;
@@ -17,17 +20,9 @@ class Settings {
   restoreDefaults() {
     this.tilesAmount = 8;
     this.tileSize = "medium";
-    this.tileFormat = Settings.getDefaultFormat();
+    this.tileFormat = "normal";
+    this.showGameRules = true;
     this.save();
-  }
-  getDefaultAmount() {
-    return 5;
-  }
-  getDefaultSize() {
-    return "medium";
-  }
-  getDefaultFormat() {
-    return "wideTile";
   }
 }
 
