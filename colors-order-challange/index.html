@@ -10,11 +10,13 @@
 </head>
 
 <body>
-    <header>
+    <header class="appElement">
         <h1>Colors Order Challange</h1>
-        <img id="settingsGear" src="materials/settings.svg" title="Settings" alt="settings button">
+        <button id="settingsGear">
+            <!-- <img src="materials/settings.svg" title="Settings" alt="settings button"> -->
+        </button>
     </header>
-    <main id="main">
+    <main class="appElement">
         <div id="gameRules">
             Game is simple:
             <ol>
@@ -32,18 +34,19 @@
 
 
     </main>
+    <footer class="appElement">
+        <section class="socials">
+            <a href="mailto:maxeleron@gmail.com" class="socialLink" title="My Mail">
+                <img src="materials/gmail_icon.png" alt="Mail link">
+            </a>
 
-    <footer>
-        <a href="mailto:maxeleron@gmail.com" id="ownersMail" title="My Mail">
-            <img src="materials/gmail_icon.png" alt="Mail link">
-        </a>
-
-        <a href="https://github.com/maxeleron" id="ownersGitHub" title="My GitHub accaunt">
-            <img src="materials/GitHub-Mark-64px.png" alt="GitHub profile link">
-        </a>
+            <a href="https://github.com/maxeleron" class="socialLink" title="My GitHub accaunt">
+                <img src="materials/GitHub-Mark-64px.png" alt="GitHub profile link">
+            </a>
+        </section>
     </footer>
 
-    <div id="settingsWindow">
+    <div id="settingsWindow" class='appElement'>
         <h2>Settings</h2>
         <label for="tileSize"> Tile size:
             <input type="number" id="tilesAmount" max="36" min="2">
