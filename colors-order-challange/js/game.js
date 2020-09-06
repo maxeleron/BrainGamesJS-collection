@@ -33,7 +33,8 @@ playBtn.addEventListener("click", () => {
   /*Game elements */
   gameTilesArr = new GameTilesArr(
     settingsObject.tilesAmount,
-    settingsObject.tileSize
+    settingsObject.tileSize,
+    settingsObject.tileFormat
   );
   //generateTiles();
   gameTilesArr.display(playground);
@@ -58,6 +59,7 @@ rememberedBtn.addEventListener("click", () => {
 });
 
 commitBtn.addEventListener("click", () => {
+  gameTilesArr.disableSortable();
   checkAnswers(playground);
 
   commitBtn.style.display = "none";

@@ -1,27 +1,30 @@
 "use strict";
 
 class GameTile {
-  constructor(Id, Color, Size) {
+  constructor(Id, Color, Size, Format) {
     this.node = document.createElement("div");
     this.id = Id;
-
-    this.node.style.background = COLORS_ARR[Color];
+    //Setting bg of tile to selected color
+    this.node.style.background = Color;
+    //Each tile will get class gameTile for styling
+    this.node.classList.add("gameTile");
+    //In dependence of settings size & format are custom
     this.node.classList.add(Size + "Tile");
+    this.node.classList.add(Format + "Tile");
   }
 }
 
 class GameTilesArr {
-  constructor(ElementsAmount, ElementSize) {
-    //let dublicateProtectionArr = [];
-    let currentColorsArr = COLORS_ARR;
+  constructor(ElementsAmount, ElementSize, ElementFormat) {
+    let colorsArr = COLORS_ARR;
     for (let i = 0; i < ElementsAmount; i++) {
-      const randomColor = Math.floor(Math.random() * currentColorsArr.length);
-      this[i] = new GameTile(i, randomColor, ElementSize);
-      this[i].node.id = i;
-      this[i].id = i;
+      /* splicing the colorsArr we return deleted element (which is colors` code),
+      which is random due to Math.random(), 
+      as I tested splice do Math.floor() automaticly on getting first argument */
+      const randColor = colorsArr.splice(Math.random() * colorsArr.length, 1);
 
-      //removing selected color from temp array to avoid dublicates
-      currentColorsArr.splice(randomColor, 1);
+      this[i] = new GameTile(i, randColor, ElementSize, ElementFormat);
+      this[i].node.id = i;
     }
     this.length = ElementsAmount;
   }

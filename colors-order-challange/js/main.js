@@ -12,6 +12,8 @@ class Settings {
       let parsedObj = JSON.parse(localStorage.getItem("settingsObject"));
       this.tilesAmount = parsedObj.tilesAmount;
       this.tileSize = parsedObj.tileSize;
+      this.tileFormat = parsedObj.tileFormat;
+      this.showGameRules = parsedObj.showGameRules;
     }
   }
   save() {
@@ -35,7 +37,11 @@ const settingsWindow = document.getElementById("settingsWindow");
 const closeSettingsWindow = document.getElementById("closeSettingsWindow");
 
 settingsBtn.addEventListener("click", () => {
-  settingsWindow.style.display = "block";
+  if (settingsWindow.style.display == "none")
+    settingsWindow.style.display = "block";
+  else {
+    settingsWindow.style.display = "none";
+  }
 });
 
 closeSettingsWindow.addEventListener("click", () => {
@@ -45,31 +51,33 @@ closeSettingsWindow.addEventListener("click", () => {
 //Settings ui elements
 const tilesAmountInput = document.getElementById("tilesAmount");
 const tilesSizeSelect = document.getElementById("tileSize");
+const tilesFormatSelect = document.getElementById("tileFormat");
+const gameRulesToggle = document.getElementById("gameRulesToggle");
 const saveSettingsBtn = document.getElementById("saveLocalSettings");
 
-tilesAmountInput.addEventListener("change", () => {
-  saveSettingsBtn.style.display = "block";
-});
-tilesSizeSelect.addEventListener("change", (event) => {
+// Setting ui elements up to date with settingsObject
+tilesAmountInput.value = settingsObject.tilesAmount;
+tilesSizeSelect.value = settingsObject.tileSize;
+tilesFormatSelect.value = settingsObject.tileFormat;
+gameRulesToggle.checked = settingsObject.showGameRules;
+
+settingsWindow.addEventListener("change", () => {
   saveSettingsBtn.style.display = "block";
 });
 
 saveSettingsBtn.addEventListener("click", () => {
   settingsObject.tilesAmount = tilesAmountInput.value;
   settingsObject.tileSize = tilesSizeSelect.value;
+  settingsObject.tileFormat = tilesFormatSelect.value;
+  settingsObject.showGameRules = gameRulesToggle.checked;
 
   settingsObject.save();
+  saveSettingsBtn.style.display = "none";
 });
-// Setting ui elements up to date with settingsObject
-tilesAmountInput.value = settingsObject.tilesAmount;
-tilesSizeSelect.value = settingsObject.tileSize;
-
 /*==============
 end:Settings*/
 
 //Global key events
 window.addEventListener("keydown", (event) => {
-  //switch('')
-
   if (event.keyCode == 27) closeSettingsWindow.click(); //Esc
 });
