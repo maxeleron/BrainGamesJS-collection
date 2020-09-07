@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html lang="eng">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Visual Memory</title>
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" href="materials/favicon.ico">
+</head>
+
+<body>
+    <header class="appElement">
+        <h1>Visual Memory</h1>
+        <button id="settingsGear">
+            <!-- <img src="materials/settings.svg" title="Settings" alt="settings button"> -->
+        </button>
+    </header>
+    <main class="appElement">
+        <div id="gameRules">
+            Game is simple:
+            <ol>
+                <li>Remember displayed squares</li>
+                <li>Try to redraw them by your own</li>
+                <li>Check your answers</li>
+            </ol>
+        </div>
+
+        <div id="playground"></div>
+
+        <button id="playBtn" class="button">Play</button>
+
+    </main>
+    <footer class="appElement">
+        <section class="socials">
+            <a href="mailto:maxeleron@gmail.com" class="socialLink" title="My Mail">
+                <img src="materials/gmail_icon.png" alt="Mail link">
+            </a>
+
+            <a href="https://github.com/maxeleron" class="socialLink" title="My GitHub accaunt">
+                <img src="materials/GitHub-Mark-64px.png" alt="GitHub profile link">
+            </a>
+        </section>
+    </footer>
+
+    <div id="settingsWindow" class='appElement'>
+        <h2>Settings</h2>
+        <label for="amountSettings"> Display elements:
+            <input type="number" id="amountSettings" max="20" min="2">
+        </label>
+
+        <label for="borderSettings"> Border size:</label>
+        <select id="borderSettings">
+            <option value="small">Small</option>
+            <option value="medium">Medium</option>
+            <option value="lagre">Large</option>
+        </select>
+
+        <label for="delayToggle"> Delay time:
+            <input type="checkbox" id="delayToggle" />
+        </label>
+
+        <label for="timerSettings"> Display elements:
+            <input type="number" id="timerSettings" max="60" min="1">
+        </label>
+
+        <label for="gameRulesToggle"> Game Rules:
+            <input type="checkbox" id="gameRulesToggle" />
+        </label>
+
+        <button id="restoreSettings" class='button'>Restore defaults</button>
+        <button id="saveLocalSettings" class='button'>Save Settings</button>
+
+        <button id="closeSettingsWindow" class="button">Close</button>
+    </div>
+
+    <script src="js/main.js" defer></script>
+    <script src="js/visual-memory-engine.js" defer></script>
+
+    <script src="js/game.js" defer></script>
+
+</body>
+
+</html>

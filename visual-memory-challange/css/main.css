@@ -1,0 +1,29 @@
+/* Game buttons
+========================*/
+.button {
+  margin: 20px auto;
+  background-color: #fc3a51;
+  font-size: 30px;
+  font-weight: 600;
+  color: white;
+  border: 0;
+  border-radius: 4px;
+
+  outline: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #7a1fef;
+
+  transition: background 0.2s linear;
+}
+
+#playBtn {
+  height: 100px;
+  width: 200px;
+}
+
+#saveLocalSettings {
+  display: none;
+}

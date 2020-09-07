@@ -1,0 +1,142 @@
+:root {
+  /*defines app border radius in header and footer*/
+  --app-br: 45px;
+
+  /*COLOR SCHEME*/
+  --page-bgc: #f1f2ee; /*page background color*/
+  --header-bgc: #bfb7b6; /*header background color*/
+  --main-bgc: #fff; /*main background color*/
+  --footer-bgc: #888; /*footer background color*/
+}
+
+body {
+  background-color: var(--page-bgc);
+
+  /*global font settings*/
+  font-family: Roboto;
+  font-size: 20px;
+  color: #435058;
+}
+
+/*Common features of header, main, foooter and settingsWindow*/
+.appElement {
+  /*displaying properties*/
+  width: 50%;
+  min-width: 600px;
+
+  /*centrify element*/
+  margin-left: auto;
+  margin-right: auto;
+
+  /*content postion*/
+  text-align: center;
+
+  /*shadow*/
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+/*Header layout
+================*/
+header {
+  /*displaying properties*/
+  display: grid;
+  height: 90px;
+  margin-top: 30px;
+  position: relative; /*to keep settingsGear in element*/
+
+  /*content*/
+  place-items: center;
+
+  /*style of header*/
+  border-top-left-radius: var(--app-br);
+  border-top-right-radius: var(--app-br);
+  background-color: var(--header-bgc);
+}
+h1 {
+  /*font properties of h1*/
+  font-size: 30px;
+}
+
+#settingsGear {
+  /*displaying properties*/
+  height: 50px;
+  width: 50px;
+
+  /*position properties*/
+  position: absolute;
+  top: 18px;
+  right: 20px;
+
+  /*styling properties*/
+  outline: none;
+  border: 0;
+  border-radius: 10px;
+  background: url(../materials/settings.svg) no-repeat;
+  background-size: cover;
+
+  /*behaviour*/
+  cursor: pointer;
+}
+
+/*Main layout
+================*/
+main {
+  /*displaying main*/
+  display: flex;
+  min-height: 400px;
+  position: relative;
+  box-sizing: border-box;
+
+  /*styling main*/
+  background-color: var(--main-bgc);
+
+  /*content of main*/
+  flex-direction: column;
+  justify-content: center;
+  padding: 30px 5px 0px;
+}
+
+/*Footer
+================*/
+footer {
+  /*displaying & position*/
+  display: grid;
+  height: 85px;
+  margin-bottom: 20px; /*footer will not touch bottom of page*/
+
+  /*styling*/
+  border-bottom-left-radius: var(--app-br);
+  border-bottom-right-radius: var(--app-br);
+  background-color: var(--footer-bgc);
+
+  /*content*/
+  place-items: center;
+}
+
+/*Social links styling (GitHub, Gmail icons)*/
+.socialLink {
+  display: inline-block;
+  text-decoration: none;
+}
+.socialLink img {
+  height: 40px;
+}
+/*Hidden windows
+===================*/
+#settingsWindow {
+  /*displaying properties*/
+  display: none;
+  height: 400px;
+
+  /*postion properties*/
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  /*styling preperties*/
+  background: #dcf763;
+  border-radius: var(--app-br);
+  box-shadow: 0 0 60px black;
+
+  /*content properties*/
+}
