@@ -1,10 +1,9 @@
 /*Tile size classes (choosing by Select tag)
 ==============*/
-.smallTile,
-.mediumTile,
-.largeTile {
+.gameTile {
   display: block; /*For tests*/
   margin: 7px auto;
+  box-sizing: border-box;
   border-radius: 5px;
 }
 
@@ -35,9 +34,7 @@
 
 /* Game buttons
 ========================*/
-.game-button {
-  height: 100px;
-  width: 200px;
+.button {
   margin: 20px auto;
   background-color: #fc3a51;
   font-size: 30px;
@@ -50,15 +47,15 @@
   cursor: pointer;
 }
 
-.game-button:hover {
+.button:hover {
   background-color: #7a1fef;
 
   transition: background 0.2s linear;
 }
 
-#commitBtn,
-#rememberedBtn {
-  display: none;
+#playBtn {
+  height: 100px;
+  width: 200px;
 }
 
 #saveLocalSettings {

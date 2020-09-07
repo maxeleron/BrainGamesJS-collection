@@ -1,7 +1,7 @@
 "use strict";
 
 const checkAnswers = (field) => {
-  const userAnswersArr = field.childNodes;
+  const userAnswersArr = field.children;
   let rightAnswers = 0;
   let wrongAnswers = 0;
   for (let i = 0; i < userAnswersArr.length; i++) {
@@ -28,40 +28,52 @@ let gameTilesArr;
 /*DOM elements */
 const playground = document.getElementById("playground");
 
-playBtn.addEventListener("click", () => {
-  playground.innerHTML = "";
-  /*Game elements */
-  gameTilesArr = new GameTilesArr(
-    settingsObject.tilesAmount,
-    settingsObject.tileSize,
-    settingsObject.tileFormat
-  );
-  //generateTiles();
-  gameTilesArr.display(playground);
-  //hiding playBtn and displaying remembered Btn
-  playBtn.style.display = "none";
-  rememberedBtn.style.display = "block";
+const playBtnHandleFunc = () => {
+  switch (playBtn.innerText) {
+    case "Play":
+    case "Play Again": {
+      playground.innerHTML = "";
+      /*Game elements */
+      gameTilesArr = new GameTilesArr(
+        settingsObject.tilesAmount,
+        settingsObject.tileSize,
+        settingsObject.tileFormat
+      );
+      gameTilesArr.display(playground);
+      //hiding playBtn and displaying remembered Btn
+      playBtn.innerText = "I Remembered";
 
-  gameRules.innerText = "Remember order of colors below:";
-});
+      gameRules.innerText = "Remember order of colors below:";
 
-rememberedBtn.addEventListener("click", () => {
-  gameRules.innerText = "Restore order of colors below:";
+      break;
+    }
 
-  gameTilesArr.enableSortable(playground);
-  gameTilesArr.shuffle();
-  gameTilesArr.display(playground);
-  //hiding rememberedBtn and displaying commit answerBtn
-  rememberedBtn.style.display = "none";
-  commitBtn.style.display = "block";
+    case "I Remembered": {
+      gameRules.innerText = "Restore order of colors below:";
 
-  window.scrollTo(0, 0);
-});
+      gameTilesArr.enableSortable(playground);
+      gameTilesArr.shuffle();
+      gameTilesArr.display(playground);
+      //hiding rememberedBtn and displaying commit answerBtn
+      playBtn.innerText = "Commit Answer";
 
-commitBtn.addEventListener("click", () => {
-  gameTilesArr.disableSortable();
-  checkAnswers(playground);
+      window.scrollTo(0, 0);
 
-  commitBtn.style.display = "none";
-  playBtn.style.display = "block";
-});
+      break;
+    }
+
+    case "Commit Answer": {
+      gameTilesArr.disableSortable();
+      checkAnswers(playground);
+
+      playBtn.innerText = "Play Again";
+      break;
+    }
+
+    default: {
+      throw Error("unexpected button");
+    }
+  }
+};
+
+playBtn.addEventListener("click", playBtnHandleFunc);

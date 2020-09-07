@@ -92,7 +92,7 @@ main {
   /*content of main*/
   flex-direction: column;
   justify-content: center;
-  padding: 30px 5px;
+  padding: 30px 5px 0px;
 }
 
 /*Footer

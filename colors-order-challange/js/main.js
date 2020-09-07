@@ -9,11 +9,13 @@ class Settings {
     }
     //if there are local settings implement them to current game
     else {
-      let parsedObj = JSON.parse(localStorage.getItem("settingsObject"));
-      this.tilesAmount = parsedObj.tilesAmount;
-      this.tileSize = parsedObj.tileSize;
-      this.tileFormat = parsedObj.tileFormat;
-      this.showGameRules = parsedObj.showGameRules;
+      const { tilesAmount, tileSize, tileFormat, showGameRules } = JSON.parse(
+        localStorage.getItem("settingsObject")
+      );
+      this.tilesAmount = tilesAmount;
+      this.tileSize = tileSize;
+      this.tileFormat = tileFormat;
+      this.showGameRules = showGameRules;
     }
   }
   save() {
@@ -34,13 +36,14 @@ let settingsObject = new Settings();
 //Getting settings ui elements
 const settingsBtn = document.getElementById("settingsGear");
 const settingsWindow = document.getElementById("settingsWindow");
+// settingsWindow.style.display = "none";
 const closeSettingsWindow = document.getElementById("closeSettingsWindow");
 
 settingsBtn.addEventListener("click", () => {
-  if (settingsWindow.style.display == "none")
-    settingsWindow.style.display = "block";
-  else {
+  if (settingsWindow.style.display == "block")
     settingsWindow.style.display = "none";
+  else {
+    settingsWindow.style.display = "block";
   }
 });
 
