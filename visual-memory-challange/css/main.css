@@ -16,12 +16,21 @@
 .button:hover {
   background-color: #7a1fef;
 
-  transition: background 0.2s linear;
+  transition: background 0.3s linear;
 }
 
 #playBtn {
   height: 100px;
   width: 200px;
+  color: #023c40;
+  background: #0ad3ff;
+}
+#playBtn:hover {
+  background: #78ffd6;
+}
+
+label {
+  display: block;
 }
 
 #saveLocalSettings {

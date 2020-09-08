@@ -1,11 +1,11 @@
 :root {
   /*defines app border radius in header and footer*/
-  --app-br: 45px;
+  --app-br: 15px;
 
   /*COLOR SCHEME*/
   --page-bgc: #f1f2ee; /*page background color*/
-  --header-bgc: #bfb7b6; /*header background color*/
-  --main-bgc: #fff; /*main background color*/
+  --header-bgc: #d1dede; /*header background color*/
+  --main-bgc: #e1faf9; /*main background color*/
   --footer-bgc: #888; /*footer background color*/
 }
 
@@ -15,13 +15,13 @@ body {
   /*global font settings*/
   font-family: Roboto;
   font-size: 20px;
-  color: #435058;
+  color: #023c40;
 }
 
 /*Common features of header, main, foooter and settingsWindow*/
 .appElement {
   /*displaying properties*/
-  width: 50%;
+  width: 90%;
   min-width: 600px;
 
   /*centrify element*/
@@ -82,7 +82,7 @@ h1 {
 main {
   /*displaying main*/
   display: flex;
-  min-height: 400px;
+  min-height: 600px;
   position: relative;
   box-sizing: border-box;
 
@@ -134,7 +134,7 @@ footer {
   transform: translate(-50%, -50%);
 
   /*styling preperties*/
-  background: #dcf763;
+  background: #c3979f;
   border-radius: var(--app-br);
   box-shadow: 0 0 60px black;
 
