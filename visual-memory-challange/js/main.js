@@ -9,12 +9,17 @@ class Settings {
     }
     //if there are local settings implement them to current game
     else {
-      const { elementsAmount } = JSON.parse(
-        localStorage.getItem("settingsObject")
-      );
-      this.tilesAmount = tilesAmount;
-      this.tileSize = tileSize;
-      this.tileFormat = tileFormat;
+      const {
+        elementsAmount,
+        borderSize,
+        showTimer,
+        timerSec,
+        showGameRules,
+      } = JSON.parse(localStorage.getItem("settingsObject"));
+      this.elementsAmount = elementsAmount;
+      this.borderSize = borderSize;
+      this.showTimer = showTimer;
+      this.timerSec = timerSec;
       this.showGameRules = showGameRules;
     }
   }
@@ -22,9 +27,11 @@ class Settings {
     localStorage.setItem("settingsObject", JSON.stringify(this));
   }
   restoreDefaults() {
-    this.tilesAmount = 8;
-    this.tileSize = "medium";
-    this.tileFormat = "normal";
+    this.elementsAmount = 5;
+    this.borderSize = "medium";
+    this.showTimer = true;
+    this.timerSec = 5;
+
     this.showGameRules = true;
     this.save();
   }
@@ -51,7 +58,6 @@ closeSettingsWindow.addEventListener("click", () => {
 });
 
 //Settings ui elements
-
 const amountSettings = document.getElementById("amountSettings");
 const borderSettingsSelect = document.getElementById("borderSettings");
 const delayToggle = document.getElementById("delayToggle");
@@ -61,9 +67,10 @@ const gameRulesToggle = document.getElementById("gameRulesToggle");
 const saveSettingsBtn = document.getElementById("saveLocalSettings");
 
 // Setting ui elements up to date with settingsObject
-tilesAmountInput.value = settingsObject.tilesAmount;
-tilesSizeSelect.value = settingsObject.tileSize;
-tilesFormatSelect.value = settingsObject.tileFormat;
+amountSettings.value = settingsObject.elementsAmount;
+borderSettingsSelect.value = settingsObject.borderSize;
+delayToggle.checked = settingsObject.showTimer;
+timerSettings.value = settingsObject.timerSec;
 
 gameRulesToggle.checked = settingsObject.showGameRules;
 
