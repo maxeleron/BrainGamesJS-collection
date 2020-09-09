@@ -9,14 +9,23 @@
 
 .smallTile {
   height: 100px;
+  line-height: 100px;
+
+  font-size: 40px;
 }
 
 .mediumTile {
   height: 150px;
+  line-height: 150px;
+
+  font-size: 60px;
 }
 
 .largeTile {
-  height: 150px;
+  height: 180px;
+  line-height: 180px;
+
+  font-size: 60px;
 }
 
 /*Tile formats*/
@@ -62,12 +71,15 @@
   display: none;
 }
 
-.rightAnswer {
-  border: 5px solid green;
-}
-
+.rightAnswer,
 .wrongAnswer {
-  border: 5px solid red;
+  border: 2px solid black;
+}
+.rightAnswer:before {
+  content: "✔";
+}
+.wrongAnswer:before {
+  content: "❌";
 }
 
 label {
