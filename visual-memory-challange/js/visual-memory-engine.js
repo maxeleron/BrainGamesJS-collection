@@ -1,11 +1,15 @@
 "use strict";
 
 class visualElement {
-  constructor(Dot1, Dot2) {}
+  constructor(startCoord, endCoord) {}
 }
 
 class visualElementsArr {
-  constructor() {}
+  constructor(elementsAmount, borderSize) {
+    for (let i = 0; i < elementsAmount; i++) {
+      let = array[i];
+    }
+  }
   draw() {}
 }
 /*Colors array */

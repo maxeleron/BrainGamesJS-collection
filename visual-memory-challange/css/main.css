@@ -36,3 +36,7 @@ label {
 #saveLocalSettings {
   display: none;
 }
+
+#playground {
+  position: relative;
+}
