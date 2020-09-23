@@ -40,3 +40,9 @@ label {
 #playground {
   position: relative;
 }
+
+/*Game elements*/
+.drawedRectacngle {
+  position: absolute;
+  border: 2px solid black;
+}

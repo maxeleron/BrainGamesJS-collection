@@ -83,4 +83,5 @@ end:Settings*/
 //Global key events
 window.addEventListener("keydown", (event) => {
   if (event.keyCode == 27) closeSettingsWindow.click(); //Esc
+  if (event.keyCode == 13) playBtn.click();
 });

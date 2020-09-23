@@ -1,5 +1,22 @@
 "use strict";
 
+const drawRectangle = (startX, startY, endX, endY) => {
+  let temp = document.createElement("div");
+
+  temp.classList.add("drawedRectacngle");
+
+  temp.style.height = Math.abs(endY - startY) + "px";
+  temp.style.width = Math.abs(endX - startX) + "px";
+
+  console.log("h:", temp.style.height, "w:", temp.style.width);
+
+  temp.style.top = Math.min(startY, endY) + "px";
+  temp.style.left = Math.min(startX, endX) + "px";
+  playground.appendChild(temp);
+
+  //console.log(`Sy: ${startY}  and  Sx: ${startY}`);
+};
+
 //Getting Game Buttons
 const playBtn = document.getElementById("playBtn");
 
@@ -58,48 +75,28 @@ let startDot = null;
 
 playground.addEventListener("mousedown", (event) => {
   console.log(`Sy: ${event.offsetY}  and  Sx: ${event.offsetY}`);
-  //temp.style.height = "100px";
-  // temp.style.width = "100px";
-
-  // temp.style.top = event.clientY;
-  // temp.style.left = event.clientX;
-  // playground.appendChild(temp);
   startDot = { x: event.offsetX, y: event.offsetY };
+  console.log(startDot);
 });
 
 playground.addEventListener("mousemove", (event) => {
-  let temp = document.createElement("div");
-
-  temp.style.position = "absolute";
-  temp.style.border = "2px solid black";
-
-  temp.style.height = event.offsetY - startDot.y + "px";
-  temp.style.width = event.offsetX - startDot.x + "px";
-
-  temp.style.top = startDot.y + "px";
-  temp.style.left = startDot.x + "px";
+  // let temp = document.createElement("div");
+  // temp.classList.add("drawedRectacngle");
+  // temp.style.height = event.offsetY - startDot.y + "px";
+  // temp.style.width = event.offsetX - startDot.x + "px";
+  // temp.style.top = startDot.y + "px";
+  // temp.style.left = startDot.x + "px";
 });
+
+const isNotTrusted = (y1, y2, x1, x2) => {
+  return Math.abs(y1 - y2) < 20 || Math.abs(x1 - x2) < 20;
+};
 
 playground.addEventListener("mouseup", (event) => {
-  if (event.offsetY - startDot.y < 20 || event.offsetX - startDot.x < 20)
+  if (isNotTrusted(event.offsetY, startDot.y, event.offsetX, startDot.x))
     return;
 
-  let temp = document.createElement("div");
-
-  temp.style.position = "absolute";
-  temp.style.border = "2px solid black";
-
-  temp.style.height = event.offsetY - startDot.y + "px";
-  temp.style.width = event.offsetX - startDot.x + "px";
-
-  temp.style.top = startDot.y + "px";
-  temp.style.left = startDot.x + "px";
-  playground.appendChild(temp);
-  console.log(`Sy: ${event.offsetY}  and  Sx: ${event.offsetY}`);
+  drawRectangle(startDot.x, startDot.y, event.offsetX, event.offsetY);
 });
-
-// playground.addEventListener("mouseup", (event) => {
-//   console.log(event);
-// });
 
 playBtn.click();

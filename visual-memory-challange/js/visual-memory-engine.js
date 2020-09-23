@@ -12,6 +12,7 @@ class visualElementsArr {
   }
   draw() {}
 }
+
 /*Colors array */
 const COLORS_ARR = [
   "#FFFF33" /*Light yellow*/,
