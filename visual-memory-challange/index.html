@@ -42,36 +42,37 @@
             </a>
         </section>
     </footer>
+    <div id="settingsWindowContainer">
+        <div id="settingsWindow" class='appElement'>
+            <h2>Settings</h2>
+            <label for="amountSettings"> Display elements:
+                <input type="number" id="amountSettings" max="20" min="2">
+            </label>
 
-    <div id="settingsWindow" class='appElement'>
-        <h2>Settings</h2>
-        <label for="amountSettings"> Display elements:
-            <input type="number" id="amountSettings" max="20" min="2">
-        </label>
+            <label for="borderSettings"> Border size:</label>
+            <select id="borderSettings">
+                <option value="small">Small</option>
+                <option value="medium">Medium</option>
+                <option value="lagre">Large</option>
+            </select>
 
-        <label for="borderSettings"> Border size:</label>
-        <select id="borderSettings">
-            <option value="small">Small</option>
-            <option value="medium">Medium</option>
-            <option value="lagre">Large</option>
-        </select>
+            <label for="delayToggle"> Delay time:
+                <input type="checkbox" id="delayToggle" />
+            </label>
 
-        <label for="delayToggle"> Delay time:
-            <input type="checkbox" id="delayToggle" />
-        </label>
+            <label for="timerSettings"> Display elements:
+                <input type="number" id="timerSettings" max="60" min="1">
+            </label>
 
-        <label for="timerSettings"> Display elements:
-            <input type="number" id="timerSettings" max="60" min="1">
-        </label>
+            <label for="gameRulesToggle"> Game Rules:
+                <input type="checkbox" id="gameRulesToggle" />
+            </label>
 
-        <label for="gameRulesToggle"> Game Rules:
-            <input type="checkbox" id="gameRulesToggle" />
-        </label>
+            <button id="restoreSettings" class='button'>Restore defaults</button>
+            <button id="saveLocalSettings" class='button'>Save Settings</button>
 
-        <button id="restoreSettings" class='button'>Restore defaults</button>
-        <button id="saveLocalSettings" class='button'>Save Settings</button>
-
-        <button id="closeSettingsWindow" class="button">Close</button>
+            <button id="closeSettingsWindow" class="button">Close</button>
+        </div>
     </div>
 
     <script src="js/main.js" defer></script>

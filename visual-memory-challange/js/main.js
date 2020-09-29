@@ -42,19 +42,21 @@ let settingsObject = new Settings();
 
 //Getting settings ui elements
 const settingsBtn = document.getElementById("settingsGear");
-const settingsWindow = document.getElementById("settingsWindow");
+const settingsWindowContainer = document.getElementById(
+  "settingsWindowContainer"
+);
 const closeSettingsWindow = document.getElementById("closeSettingsWindow");
 
 settingsBtn.addEventListener("click", () => {
-  if (settingsWindow.style.display == "block")
-    settingsWindow.style.display = "none";
+  if (settingsWindowContainer.style.display == "block")
+    settingsWindowContainer.style.display = "none";
   else {
-    settingsWindow.style.display = "block";
+    settingsWindowContainer.style.display = "block";
   }
 });
 
 closeSettingsWindow.addEventListener("click", () => {
-  settingsWindow.style.display = "none";
+  settingsWindowContainer.style.display = "none";
 });
 
 //Settings ui elements
@@ -74,7 +76,7 @@ timerSettings.value = settingsObject.timerSec;
 
 gameRulesToggle.checked = settingsObject.showGameRules;
 
-settingsWindow.addEventListener("change", () => {
+settingsWindowContainer.addEventListener("change", () => {
   saveSettingsBtn.style.display = "block";
 });
 
@@ -94,5 +96,5 @@ end:Settings*/
 
 //Global key events
 window.addEventListener("keydown", (event) => {
-  if (event.keyCode == 27) closeSettingsWindow.click(); //Esc
+  if (event.code == 27) closeSettingsWindow.click(); //Esc
 });
