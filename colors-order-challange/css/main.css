@@ -1,7 +1,10 @@
-/*Tile size classes (choosing by Select tag)
-==============*/
+/* Colors Order Challenge — game-specific styles
+   ================================================ */
+
+/* Tile size classes (choosing by Select tag)
+   =========================================== */
 .gameTile {
-  display: block; /*For tests*/
+  display: block;
   margin: 7px auto;
   box-sizing: border-box;
   border-radius: 5px;
@@ -10,25 +13,22 @@
 .smallTile {
   height: 100px;
   line-height: 100px;
-
   font-size: 40px;
 }
 
 .mediumTile {
   height: 150px;
   line-height: 150px;
-
   font-size: 60px;
 }
 
 .largeTile {
   height: 180px;
   line-height: 180px;
-
   font-size: 60px;
 }
 
-/*Tile formats*/
+/* Tile formats */
 .narrowTile {
   width: 25%;
 }
@@ -41,27 +41,7 @@
   width: 100%;
 }
 
-/* Game buttons
-========================*/
-.button {
-  margin: 20px auto;
-  background-color: #fc3a51;
-  font-size: 30px;
-  font-weight: 600;
-  color: white;
-  border: 0;
-  border-radius: 4px;
-
-  outline: none;
-  cursor: pointer;
-}
-
-.button:hover {
-  background-color: #7a1fef;
-
-  transition: background 0.2s linear;
-}
-
+/* Play button size */
 #playBtn {
   height: 100px;
   width: 200px;
@@ -75,15 +55,13 @@
 .wrongAnswer {
   border: 2px solid black;
 }
+
 .rightAnswer:before {
   content: "✔";
 }
+
 .wrongAnswer:before {
   content: "❌";
-}
-
-label {
-  display: block;
 }
 
 .sortable {

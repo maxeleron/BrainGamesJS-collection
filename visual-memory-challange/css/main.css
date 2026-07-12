@@ -1,36 +1,16 @@
-/* Game buttons
-========================*/
-.button {
-  margin: 20px auto;
-  background-color: #fc3a51;
-  font-size: 30px;
-  font-weight: 600;
-  color: white;
-  border: 0;
-  border-radius: 4px;
+/* Visual Memory Challenge — game-specific styles
+   ================================================= */
 
-  outline: none;
-  cursor: pointer;
-}
-
-.button:hover {
-  background-color: #7a1fef;
-
-  transition: background 0.3s linear;
-}
-
+/* Play button — game accent colors */
 #playBtn {
   height: 100px;
   width: 200px;
   color: #023c40;
   background: #0ad3ff;
 }
+
 #playBtn:hover {
   background: #78ffd6;
-}
-
-label {
-  display: block;
 }
 
 #saveLocalSettings {
@@ -41,7 +21,7 @@ label {
   position: relative;
 }
 
-/*Game elements*/
+/* Game elements */
 .drawedRectacngle {
   position: absolute;
   border: 2px solid black;

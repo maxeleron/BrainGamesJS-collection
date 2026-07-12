@@ -1,0 +1,239 @@
+/* ============================================================================
+   BrainGamesJS Collection — Shared UI
+   Common layout, chrome, modals, and controls used across all games.
+   Game-specific themes override CSS custom properties in each game's CSS.
+   ============================================================================ */
+
+/* ----------------------------------------------------------------------------
+   CSS Custom Properties (defaults — override per game)
+   ---------------------------------------------------------------------------- */
+:root {
+  /* App shell geometry */
+  --app-br: 45px; /* border-radius for header / footer / modals */
+  --app-width: 50%;
+  --app-min-width: 600px;
+  --main-min-height: 400px;
+
+  /* Color scheme */
+  --page-bgc: #f1f2ee;
+  --header-bgc: #bfb7b6;
+  --main-bgc: #fff;
+  --footer-bgc: #888;
+  --text-color: #435058;
+  --settings-window-bg: #dcf763;
+
+  /* Buttons */
+  --button-bg: #fc3a51;
+  --button-hover-bg: #7a1fef;
+  --button-color: #fff;
+  --button-radius: 4px;
+}
+
+/* ----------------------------------------------------------------------------
+   Base / page
+   ---------------------------------------------------------------------------- */
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--page-bgc);
+  font-family: Roboto, sans-serif;
+  font-size: 20px;
+  color: var(--text-color);
+}
+
+/* ----------------------------------------------------------------------------
+   App shell — shared geometry for header, main, footer, modals
+   ---------------------------------------------------------------------------- */
+.appElement {
+  width: var(--app-width);
+  min-width: var(--app-min-width);
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Header
+   ======== */
+header {
+  display: grid;
+  height: 90px;
+  margin-top: 30px;
+  position: relative; /* anchors #settingsGear */
+  place-items: center;
+  border-top-left-radius: var(--app-br);
+  border-top-right-radius: var(--app-br);
+  background-color: var(--header-bgc);
+}
+
+h1 {
+  font-size: 30px;
+}
+
+/* Settings gear button
+   (background-image is set per game — materials paths are local)
+   ============================================================== */
+#settingsGear {
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  outline: none;
+  border: 0;
+  border-radius: 10px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+}
+
+/* Main
+   ====== */
+main {
+  display: flex;
+  min-height: var(--main-min-height);
+  position: relative;
+  box-sizing: border-box;
+  background-color: var(--main-bgc);
+  flex-direction: column;
+  justify-content: center;
+  padding: 30px 5px 0;
+}
+
+/* Footer
+   ======== */
+footer {
+  display: grid;
+  height: 85px;
+  margin-bottom: 20px;
+  border-bottom-left-radius: var(--app-br);
+  border-bottom-right-radius: var(--app-br);
+  background-color: var(--footer-bgc);
+  place-items: center;
+}
+
+footer a {
+  text-decoration: none;
+}
+
+footer a img {
+  height: 40px;
+}
+
+/* Social icons (GitHub, Gmail, etc.)
+   =================================== */
+.socialLink {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.socialLink img {
+  height: 40px;
+}
+
+/* ----------------------------------------------------------------------------
+   Settings / Rules modals
+   ---------------------------------------------------------------------------- */
+#settingsWindow,
+#rulesWindow {
+  display: none;
+  height: 400px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--settings-window-bg);
+  border-radius: var(--app-br);
+  box-shadow: 0 0 60px black;
+  z-index: 9999;
+  overflow: hidden;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Full-viewport dimmed overlay (used by visual-memory) */
+#settingsWindowContainer {
+  display: none;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 15;
+}
+
+/* ----------------------------------------------------------------------------
+   Buttons
+   ---------------------------------------------------------------------------- */
+.button,
+.game-button,
+.closeWinBtn {
+  margin: 20px auto;
+  background-color: var(--button-bg);
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--button-color);
+  border: 0;
+  border-radius: var(--button-radius);
+  outline: none;
+  cursor: pointer;
+}
+
+.button:hover,
+.game-button:hover,
+.closeWinBtn:hover {
+  background-color: var(--button-hover-bg);
+  transition: background 0.2s linear;
+}
+
+/* Modal close buttons are slightly smaller */
+.closeWinBtn {
+  display: block;
+  height: 50px;
+  width: 100px;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+/* ----------------------------------------------------------------------------
+   Common form / utility elements
+   ---------------------------------------------------------------------------- */
+label {
+  display: block;
+}
+
+/* Progress bar (mind-calc and future games) */
+progress {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+  width: 100%;
+  height: 12px;
+  border: 0;
+  color: red;
+  margin-top: 0;
+}
+
+progress[value]::-webkit-progress-bar {
+  background-color: #eee;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
+progress[value]::-webkit-progress-value {
+  background: -webkit-linear-gradient(
+      top,
+      rgba(255, 255, 255, 0.25),
+      rgba(0, 0, 0, 0.25)
+    ),
+    -webkit-linear-gradient(left, #fd3d5e, #9005e6);
+  border-radius: 2px;
+  background-size: 35px 20px, 100% 100%, 100% 100%;
+}
