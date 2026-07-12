@@ -1,60 +1,41 @@
-# BrainGamesJS-collection [EN/Global localization]
+# BrainGamesJS Collection
 
-A bunch of javascript-based browser games, that has next purposes:
-1. get interesting mind training games;
-2. create beautiful UI design;
-3. test my JS knowledge.
+A collection of JavaScript browser games for mind training, modern UI practice, and learning JS.
 
-## 1. Mind Calc Challenge
+**Play:** open [`index.html`](index.html) in the repo root for the hub, or jump to a game below.
 
-**Mind Calc Challenge** - is a simple game where player should write modified number in relation of color of showed number _(for example: if num 43 shows with red color user shoud count +3 and write 46, each color will have different rule)_
+## Games
 
-**Features (Mind Calc)**:
+### 1. [Mind Calc Challenge](mind-calc-challenge/)
 
-- [x] Simple layout
-- [x] Settings and Game Rules windows (can be displayed)
-- [x] Footer styling and linking
-- [x] Game works with 1 color and 1 rule (10 questions)
-- [x] Realised progress bar
-- [ ] _Adaptive layout_
-- [ ] _Style Settings and Game Rules windows_
-- [ ] _User can change settings in session_
-- [ ] _User can save settings locally_
-*_Maybe Features (Mind Calc)_*
+Solve color-based arithmetic: the number’s color tells you how to transform it before answering (for example, red might mean “add 3”).
 
-## 2. Colors Order Challenge
+### 2. [Colors Order Challenge](colors-order-challenge/)
 
-**Colors Order Challenge** - is a simple graphic game where player should use their memory to memorize order of colors boxes _(for example: first colors shown [**green**, **red**, **yellow**], after shuffle collors could be displayed [**yellow**, **green**, **red**], after User has to manipulate colors boxes (with drag&drop) to recover colors` order)_
+Memorize a sequence of color tiles, then restore the order after they are shuffled (drag & drop).
 
-**Features (Colors Order)**:
+### 3. [Visual Memory Challenge](visual-memory-challenge/)
 
-- [x] Simple layout
-- [x] Game generates and shows color tiles
-- [x] Footer styling and linking
-- [ ] _Settings and Game Rules windows (can be displayed)_
-- [ ] _Adaptive layout_
-- [ ] _Style Settings and Game Rules windows_
-- [ ] _User can change settings in session_
-- [ ] _Style settings_
-- [ ] _Add drag & drop to solve the quiz_
-- [ ] _User can save settings locally_
-- [ ] _Add OOP principles to colors-order-engine.js_
-- [ ] _Duplicate protection in quiz_
-- [ ] _User can choose size of tiles_
-- [ ] _User can choose amount of tiles_
-- [ ] _Timer for quiz_
+Remember shapes and positions, then redraw them from memory.
 
-## 3. Visual memory Challenge
+### 4. String Search Challenge _(planned)_
 
-**Visual memory challange** - 
+Quick visual search for target strings among distractors.
 
+## Design system
 
-## 4. String Search Challenge
+- Shared UI: [`css/shared-ui.css`](css/shared-ui.css)
+- Theme controller: [`js/theme.js`](js/theme.js) (`localStorage` key `bgjs_theme`, default **light**)
+- Light / Dark themes work on the hub and every game
 
-**String Search Challenge** - is a simple visual game where player should use sight to quickly search and _(for example: User choose word length from 2 to 6 letters, and font size, and as fast as their can )_
+## Structure
 
-**Features (String Search)**:
-
-- [ ] _Simple layout_
-- [ ] _Game generates and shows strings_
-- [ ] _Footer styling and linking_
+```
+BrainGamesJS-collection/
+├── index.html                 # Landing hub
+├── css/shared-ui.css
+├── js/theme.js
+├── colors-order-challenge/
+├── mind-calc-challenge/
+└── visual-memory-challenge/
+```

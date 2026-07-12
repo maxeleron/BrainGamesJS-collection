@@ -1,0 +1,238 @@
+/* ============================================================================
+   BrainGamesJS Collection — Landing hub
+   Extends shared-ui.css with hub-specific layout & game cards.
+   ============================================================================ */
+
+:root,
+[data-theme="light"] {
+  --accent: #4f46e5;
+  --accent-hover: #4338ca;
+  --accent-muted: #e0e7ff;
+  --accent-contrast: #ffffff;
+}
+
+[data-theme="dark"] {
+  --accent: #818cf8;
+  --accent-hover: #a5b4fc;
+  --accent-muted: #1e1b4b;
+  --accent-contrast: #0f172a;
+}
+
+/* Wider hub for a card grid */
+:root {
+  --app-max-width: 56rem;
+  --main-min-height: auto;
+}
+
+/* Hub header: title absolute-centered; theme control on the right */
+.hub-header {
+  min-height: var(--header-height);
+}
+
+.hub-header .header-actions {
+  /* inherits shared absolute right positioning */
+}
+
+.hub-theme-toggle {
+  display: flex;
+  gap: var(--space-1);
+  padding: var(--space-1);
+  background: var(--bg-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.hub-theme-toggle label {
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  min-height: calc(var(--touch-min) - 4px);
+  min-width: calc(var(--touch-min) - 4px);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-muted);
+  width: auto;
+}
+
+.hub-theme-toggle label:has(input:checked),
+.hub-theme-toggle label.is-active {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.hub-theme-toggle input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Main hub content */
+.hub-main {
+  align-items: stretch;
+  gap: var(--space-5);
+  padding: var(--space-6) var(--space-5);
+  text-align: left;
+}
+
+.hub-intro {
+  text-align: center;
+  max-width: 36rem;
+  margin: 0 auto;
+}
+
+.hub-intro h2 {
+  font-size: var(--font-size-xl);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-2);
+}
+
+.hub-intro p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+}
+
+/* Game card grid */
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15.5rem), 1fr));
+  gap: var(--space-4);
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.game-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-3);
+  min-height: 12rem;
+  padding: var(--space-5) var(--space-4);
+  text-decoration: none;
+  color: inherit;
+  background: var(--bg-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: background-color var(--transition-fast),
+    border-color var(--transition-fast), box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+  touch-action: manipulation;
+}
+
+.game-card:hover,
+.game-card:focus-visible {
+  background: var(--bg-elevated);
+  border-color: var(--card-accent, var(--accent));
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.game-card:active {
+  transform: translateY(0);
+}
+
+.game-card__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--accent-contrast);
+  background: var(--card-accent, var(--accent));
+  flex-shrink: 0;
+}
+
+.game-card__title {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  line-height: var(--line-height-tight);
+}
+
+.game-card__desc {
+  margin: 0;
+  flex: 1;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  line-height: var(--line-height-normal);
+}
+
+.game-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--card-accent, var(--accent));
+}
+
+.game-card:hover .game-card__cta,
+.game-card:focus-visible .game-card__cta {
+  color: var(--card-accent-hover, var(--accent-hover));
+}
+
+/* Per-game accents on cards */
+.game-card--colors {
+  --card-accent: #5b21b6;
+  --card-accent-hover: #4c1d95;
+}
+
+.game-card--mind {
+  --card-accent: #e11d48;
+  --card-accent-hover: #be123c;
+}
+
+.game-card--visual {
+  --card-accent: #0891b2;
+  --card-accent-hover: #0e7490;
+}
+
+[data-theme="dark"] .game-card--colors {
+  --card-accent: #a78bfa;
+  --card-accent-hover: #c4b5fd;
+}
+
+[data-theme="dark"] .game-card--mind {
+  --card-accent: #fb7185;
+  --card-accent-hover: #fda4af;
+}
+
+[data-theme="dark"] .game-card--visual {
+  --card-accent: #22d3ee;
+  --card-accent-hover: #67e8f9;
+}
+
+[data-theme="dark"] .game-card--colors .game-card__badge,
+[data-theme="dark"] .game-card--mind .game-card__badge,
+[data-theme="dark"] .game-card--visual .game-card__badge {
+  color: #0f172a;
+}
+
+@media (max-width: 480px) {
+  .hub-main {
+    padding: var(--space-5) var(--space-3);
+  }
+
+  .hub-theme-toggle label {
+    padding: var(--space-1) var(--space-2);
+  }
+}

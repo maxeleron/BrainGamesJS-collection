@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Colors Order Challenge</title>
+    <title>Visual Memory</title>
     <script>
         (function () {
             try {
@@ -17,12 +17,12 @@
     </script>
     <link rel="stylesheet" href="../css/shared-ui.css">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="icon" href="materials/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="materials/vm-favicon.svg">
 </head>
 
 <body>
     <header class="appElement">
-        <h1>Colors Order Challenge</h1>
+        <h1>Visual Memory</h1>
         <button type="button" id="settingsGear" title="Settings" aria-label="Open settings">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -38,9 +38,9 @@
         <div id="gameRules">
             Game is simple:
             <ol>
-                <li>Remember order of color tiles</li>
-                <li>Restore order after shuffling</li>
-                <li>More options in settings</li>
+                <li>Remember displayed squares</li>
+                <li>Try to redraw them by your own</li>
+                <li>Check your answers</li>
             </ol>
         </div>
 
@@ -64,61 +64,62 @@
         </section>
     </footer>
 
-    <div id="settingsWindow" class="appElement" role="dialog" aria-labelledby="settingsTitle" aria-modal="true">
-        <h2 id="settingsTitle">Settings</h2>
+    <div id="settingsWindowContainer">
+        <div id="settingsWindow" class="appElement" role="dialog" aria-labelledby="vmSettingsTitle" aria-modal="true">
+            <h2 id="vmSettingsTitle">Settings</h2>
 
-        <label for="tilesAmount">Tiles amount
-            <input type="number" id="tilesAmount" max="36" min="2" value="8">
-        </label>
+            <label for="amountSettings">Display elements
+                <input type="number" id="amountSettings" max="20" min="2" value="5">
+            </label>
 
-        <div class="form-row">
-            <span class="form-label" id="tileSizeLabel">Tile size</span>
-            <select id="tileSize" aria-labelledby="tileSizeLabel">
-                <option value="small">Small</option>
-                <option value="medium" selected>Medium</option>
-                <option value="large">Large</option>
-            </select>
-        </div>
-
-        <div class="form-row">
-            <span class="form-label" id="tileFormatLabel">Tile format</span>
-            <select id="tileFormat" aria-labelledby="tileFormatLabel">
-                <option value="narrow">Narrow</option>
-                <option value="normal" selected>Normal</option>
-                <option value="wide">Wide</option>
-            </select>
-        </div>
-
-        <label for="gameRulesToggle">
-            <input type="checkbox" id="gameRulesToggle" checked>
-            Show game rules
-        </label>
-
-        <div class="form-row">
-            <span class="form-label">Theme</span>
-            <div class="theme-toggle" role="radiogroup" aria-label="Color theme">
-                <label>
-                    <input type="radio" name="bgjs_theme" value="light" checked>
-                    Light
-                </label>
-                <label>
-                    <input type="radio" name="bgjs_theme" value="dark">
-                    Dark
-                </label>
+            <div class="form-row">
+                <span class="form-label" id="borderSettingsLabel">Border size</span>
+                <select id="borderSettings" aria-labelledby="borderSettingsLabel">
+                    <option value="small">Small</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="lagre">Large</option>
+                </select>
             </div>
-        </div>
 
-        <div class="modal-actions">
-            <button type="button" id="restoreSettings" class="button btn btn-secondary">Restore defaults</button>
-            <button type="button" id="saveLocalSettings" class="button btn btn-primary">Save Settings</button>
-            <button type="button" id="closeSettingsWindow" class="button btn btn-secondary">Close</button>
+            <label for="delayToggle">
+                <input type="checkbox" id="delayToggle" checked>
+                Delay time
+            </label>
+
+            <label for="timerSettings">Timer (seconds)
+                <input type="number" id="timerSettings" max="60" min="1" value="5">
+            </label>
+
+            <label for="gameRulesToggle">
+                <input type="checkbox" id="gameRulesToggle" checked>
+                Show game rules
+            </label>
+
+            <div class="form-row">
+                <span class="form-label">Theme</span>
+                <div class="theme-toggle" role="radiogroup" aria-label="Color theme">
+                    <label>
+                        <input type="radio" name="bgjs_theme" value="light" checked>
+                        Light
+                    </label>
+                    <label>
+                        <input type="radio" name="bgjs_theme" value="dark">
+                        Dark
+                    </label>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" id="restoreSettings" class="button btn btn-secondary">Restore defaults</button>
+                <button type="button" id="saveLocalSettings" class="button btn btn-primary">Save Settings</button>
+                <button type="button" id="closeSettingsWindow" class="button btn btn-secondary">Close</button>
+            </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js" defer></script>
     <script src="../js/theme.js" defer></script>
     <script src="js/main.js" defer></script>
-    <script src="js/colors-order-engine.js" defer></script>
+    <!-- <script src="js/visual-memory-engine.js" defer></script> -->
     <script src="js/game.js" defer></script>
 </body>
 

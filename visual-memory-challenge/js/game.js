@@ -3,7 +3,7 @@
 const drawRectangle = (startX, startY, endX, endY) => {
   let temp = document.createElement("div");
 
-  temp.classList.add("drawedRectacngle");
+  temp.classList.add("drawnRectangle");
 
   temp.style.height = Math.abs(endY - startY) + "px";
   temp.style.width = Math.abs(endX - startX) + "px";
@@ -82,7 +82,7 @@ playground.addEventListener("mousedown", (event) => {
 
 playground.addEventListener("mousemove", (event) => {
   // let temp = document.createElement("div");
-  // temp.classList.add("drawedRectacngle");
+  // temp.classList.add("drawnRectangle");
   // temp.style.height = event.offsetY - startDot.y + "px";
   // temp.style.width = event.offsetX - startDot.x + "px";
   // temp.style.top = startDot.y + "px";
