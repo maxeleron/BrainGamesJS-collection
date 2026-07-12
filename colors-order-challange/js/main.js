@@ -33,22 +33,42 @@ class Settings {
 //Local Settings Object
 let settingsObject = new Settings();
 
+// Theme (shared across collection)
+if (window.BGJSTheme) {
+  window.BGJSTheme.initTheme();
+}
+
 //Getting settings ui elements
 const settingsBtn = document.getElementById("settingsGear");
 const settingsWindow = document.getElementById("settingsWindow");
-// settingsWindow.style.display = "none";
 const closeSettingsWindow = document.getElementById("closeSettingsWindow");
+const gameRulesEl = document.getElementById("gameRules");
+
+function isSettingsOpen() {
+  var d = settingsWindow.style.display;
+  return d === "block" || d === "flex";
+}
+
+function openSettings() {
+  settingsWindow.style.display = "flex";
+  document.body.classList.add("modal-open");
+  if (window.BGJSTheme) {
+    window.BGJSTheme.syncThemeControls();
+  }
+}
+
+function closeSettings() {
+  settingsWindow.style.display = "none";
+  document.body.classList.remove("modal-open");
+}
 
 settingsBtn.addEventListener("click", () => {
-  if (settingsWindow.style.display == "block")
-    settingsWindow.style.display = "none";
-  else {
-    settingsWindow.style.display = "block";
-  }
+  if (isSettingsOpen()) closeSettings();
+  else openSettings();
 });
 
 closeSettingsWindow.addEventListener("click", () => {
-  settingsWindow.style.display = "none";
+  closeSettings();
 });
 
 //Settings ui elements
@@ -57,14 +77,27 @@ const tilesSizeSelect = document.getElementById("tileSize");
 const tilesFormatSelect = document.getElementById("tileFormat");
 const gameRulesToggle = document.getElementById("gameRulesToggle");
 const saveSettingsBtn = document.getElementById("saveLocalSettings");
+const restoreSettingsBtn = document.getElementById("restoreSettings");
+
+function syncSettingsForm() {
+  tilesAmountInput.value = settingsObject.tilesAmount;
+  tilesSizeSelect.value = settingsObject.tileSize;
+  tilesFormatSelect.value = settingsObject.tileFormat;
+  gameRulesToggle.checked = settingsObject.showGameRules;
+}
+
+function applyRulesVisibility() {
+  if (!gameRulesEl) return;
+  gameRulesEl.style.display = settingsObject.showGameRules ? "" : "none";
+}
 
 // Setting ui elements up to date with settingsObject
-tilesAmountInput.value = settingsObject.tilesAmount;
-tilesSizeSelect.value = settingsObject.tileSize;
-tilesFormatSelect.value = settingsObject.tileFormat;
-gameRulesToggle.checked = settingsObject.showGameRules;
+syncSettingsForm();
+applyRulesVisibility();
 
-settingsWindow.addEventListener("change", () => {
+settingsWindow.addEventListener("change", (event) => {
+  // Theme changes are applied instantly via BGJSTheme; still show Save for game settings
+  if (event.target && event.target.name === "bgjs_theme") return;
   saveSettingsBtn.style.display = "block";
 });
 
@@ -75,13 +108,26 @@ saveSettingsBtn.addEventListener("click", () => {
   settingsObject.showGameRules = gameRulesToggle.checked;
 
   settingsObject.save();
+  applyRulesVisibility();
   saveSettingsBtn.style.display = "none";
 });
+
+if (restoreSettingsBtn) {
+  restoreSettingsBtn.addEventListener("click", () => {
+    settingsObject.restoreDefaults();
+    syncSettingsForm();
+    applyRulesVisibility();
+    saveSettingsBtn.style.display = "none";
+  });
+}
 /*==============
 end:Settings*/
 
 //Global key events
 window.addEventListener("keydown", (event) => {
-  if (event.keyCode == 27) closeSettingsWindow.click(); //Esc
-  if (event.keyCode == 13) playBtn.click();
+  if (event.key === "Escape" || event.keyCode == 27) closeSettings(); //Esc
+  if (event.key === "Enter" || event.keyCode == 13) {
+    const playBtn = document.getElementById("playBtn");
+    if (playBtn && !isSettingsOpen()) playBtn.click();
+  }
 });

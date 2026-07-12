@@ -1,239 +1,879 @@
 /* ============================================================================
-   BrainGamesJS Collection — Shared UI
-   Common layout, chrome, modals, and controls used across all games.
-   Game-specific themes override CSS custom properties in each game's CSS.
+   BrainGamesJS Collection — Shared Design System
+   ----------------------------------------------------------------------------
+   Tokens map cleanly to future Android (Compose/Flutter) theme layers.
+   Light is the default. Dark is applied via data-theme="dark" on <html>.
+   Games set --accent* locally for distinct identity.
    ============================================================================ */
 
-/* ----------------------------------------------------------------------------
-   CSS Custom Properties (defaults — override per game)
-   ---------------------------------------------------------------------------- */
-:root {
-  /* App shell geometry */
-  --app-br: 45px; /* border-radius for header / footer / modals */
-  --app-width: 50%;
-  --app-min-width: 600px;
-  --main-min-height: 400px;
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
-  /* Color scheme */
-  --page-bgc: #f1f2ee;
-  --header-bgc: #bfb7b6;
-  --main-bgc: #fff;
-  --footer-bgc: #888;
-  --text-color: #435058;
-  --settings-window-bg: #dcf763;
+/* ============================================================================
+   1. DESIGN TOKENS — Light (default)
+   ============================================================================ */
+:root,
+[data-theme="light"] {
+  /* Backgrounds */
+  --bg-page: #f0f2f5;
+  --bg-surface: #ffffff;
+  --bg-elevated: #ffffff;
+  --bg-header: #e8ebf0;
+  --bg-footer: #e4e7ec;
+  --bg-muted: #f4f6f8;
+  --bg-overlay: rgba(15, 23, 42, 0.48);
 
-  /* Buttons */
-  --button-bg: #fc3a51;
-  --button-hover-bg: #7a1fef;
-  --button-color: #fff;
-  --button-radius: 4px;
+  /* Text */
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --text-inverse: #f8fafc;
+
+  /* Accent (games override) — indigo default */
+  --accent: #4f46e5;
+  --accent-hover: #4338ca;
+  --accent-muted: #e0e7ff;
+  --accent-contrast: #ffffff;
+
+  /* Semantic */
+  --success: #16a34a;
+  --success-muted: #dcfce7;
+  --error: #dc2626;
+  --error-muted: #fee2e2;
+  --warning: #d97706;
+
+  /* Borders & shadows */
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 4px 14px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 16px 40px rgba(15, 23, 42, 0.14);
+
+  /* Radii — squarish (max 8px) */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+
+  /* Spacing scale */
+  --space-1: 0.25rem; /* 4px */
+  --space-2: 0.5rem; /* 8px */
+  --space-3: 0.75rem; /* 12px */
+  --space-4: 1rem; /* 16px */
+  --space-5: 1.5rem; /* 24px */
+  --space-6: 2rem; /* 32px */
+  --space-7: 3rem; /* 48px */
+  --space-8: 4rem; /* 64px */
+
+  /* Typography */
+  --font-family: "Inter", "Aptos", "Segoe UI", system-ui, -apple-system,
+    BlinkMacSystemFont, sans-serif;
+  --font-size-xs: clamp(0.75rem, 0.7rem + 0.2vw, 0.8125rem);
+  --font-size-sm: clamp(0.875rem, 0.82rem + 0.25vw, 0.9375rem);
+  --font-size-md: clamp(1rem, 0.95rem + 0.25vw, 1.0625rem);
+  --font-size-lg: clamp(1.125rem, 1.05rem + 0.4vw, 1.375rem);
+  --font-size-xl: clamp(1.375rem, 1.2rem + 0.6vw, 1.75rem);
+  --font-size-2xl: clamp(1.625rem, 1.4rem + 0.8vw, 2.125rem);
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Layout */
+  --app-max-width: 42rem; /* ~672px */
+  --app-width: min(100% - 2 * var(--space-4), var(--app-max-width));
+  --main-min-height: min(60vh, 32rem);
+  --header-height: 4rem;
+  --footer-height: 4.25rem;
+  --touch-min: 48px;
+  --z-modal: 1000;
+  --z-overlay: 999;
+
+  /* Motion */
+  --transition-fast: 0.15s ease;
+  --transition: 0.2s ease;
+
+  /* Legacy aliases (older game CSS / gradual migration) */
+  --page-bgc: var(--bg-page);
+  --header-bgc: var(--bg-header);
+  --main-bgc: var(--bg-surface);
+  --footer-bgc: var(--bg-footer);
+  --text-color: var(--text-primary);
+  --settings-window-bg: var(--bg-elevated);
+  --button-bg: var(--accent);
+  --button-hover-bg: var(--accent-hover);
+  --button-color: var(--accent-contrast);
+  --button-radius: var(--radius-md);
+  --app-br: var(--radius-lg);
+  --app-min-width: 0;
 }
 
-/* ----------------------------------------------------------------------------
-   Base / page
-   ---------------------------------------------------------------------------- */
+/* ============================================================================
+   2. DESIGN TOKENS — Dark (Night)
+   ============================================================================ */
+[data-theme="dark"] {
+  --bg-page: #0c1017;
+  --bg-surface: #151b26;
+  --bg-elevated: #1c2433;
+  --bg-header: #121821;
+  --bg-footer: #121821;
+  --bg-muted: #1a2230;
+  --bg-overlay: rgba(0, 0, 0, 0.62);
+
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-inverse: #0f172a;
+
+  --accent: #818cf8;
+  --accent-hover: #a5b4fc;
+  --accent-muted: #1e1b4b;
+  --accent-contrast: #0f172a;
+
+  --success: #22c55e;
+  --success-muted: #14532d;
+  --error: #f87171;
+  --error-muted: #7f1d1d;
+  --warning: #fbbf24;
+
+  --border: #2a3548;
+  --border-strong: #3d4d66;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 18px 44px rgba(0, 0, 0, 0.55);
+}
+
+/* ============================================================================
+   3. BASE / RESET
+   ============================================================================ */
 *,
-*:before,
-*:after {
+*::before,
+*::after {
   box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
 }
 
 body {
   margin: 0;
-  background-color: var(--page-bgc);
-  font-family: Roboto, sans-serif;
-  font-size: 20px;
-  color: var(--text-color);
+  min-height: 100dvh;
+  font-family: var(--font-family);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+  color: var(--text-primary);
+  background-color: var(--bg-page);
+  transition: background-color var(--transition), color var(--transition);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* ----------------------------------------------------------------------------
-   App shell — shared geometry for header, main, footer, modals
-   ---------------------------------------------------------------------------- */
-.appElement {
-  width: var(--app-width);
-  min-width: var(--app-min-width);
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
-/* Header
-   ======== */
-header {
-  display: grid;
-  height: 90px;
-  margin-top: 30px;
-  position: relative; /* anchors #settingsGear */
-  place-items: center;
-  border-top-left-radius: var(--app-br);
-  border-top-right-radius: var(--app-br);
-  background-color: var(--header-bgc);
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--text-primary);
 }
 
 h1 {
-  font-size: 30px;
+  font-size: var(--font-size-xl);
 }
 
-/* Settings gear button
-   (background-image is set per game — materials paths are local)
-   ============================================================== */
+h2 {
+  font-size: var(--font-size-lg);
+}
+
+p {
+  margin: 0 0 var(--space-3);
+}
+
+ol,
+ul {
+  margin: var(--space-2) 0 0;
+  padding-left: 1.25rem;
+  text-align: left;
+}
+
+/* ============================================================================
+   4. APP SHELL
+   ============================================================================ */
+.app,
+.appElement {
+  width: var(--app-width);
+  max-width: var(--app-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+/* Stack shell vertically with comfortable page padding */
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-4) 0 var(--space-5);
+  gap: 0;
+}
+
+header.appElement,
+header.app,
+header {
+  display: grid;
+  grid-template-columns: var(--touch-min) 1fr var(--touch-min);
+  align-items: center;
+  width: var(--app-width);
+  max-width: var(--app-max-width);
+  min-height: var(--header-height);
+  margin: 0 auto;
+  padding: var(--space-2) var(--space-4);
+  position: relative;
+  background-color: var(--bg-header);
+  border: 1px solid var(--border);
+  border-bottom: none;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  box-shadow: var(--shadow-sm);
+  transition: background-color var(--transition), border-color var(--transition),
+    color var(--transition);
+}
+
+header h1 {
+  grid-column: 2;
+  justify-self: center;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.02em;
+}
+
+main.appElement,
+main.app,
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  width: var(--app-width);
+  max-width: var(--app-max-width);
+  min-height: var(--main-min-height);
+  margin: 0 auto;
+  padding: var(--space-5) var(--space-4);
+  position: relative;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  box-shadow: var(--shadow-md);
+  text-align: center;
+  gap: var(--space-4);
+  transition: background-color var(--transition), border-color var(--transition),
+    color var(--transition);
+}
+
+footer.appElement,
+footer.app,
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--app-width);
+  max-width: var(--app-max-width);
+  min-height: var(--footer-height);
+  margin: 0 auto;
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--bg-footer);
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: background-color var(--transition), border-color var(--transition);
+}
+
+/* ============================================================================
+   5. SETTINGS GEAR
+   ============================================================================ */
 #settingsGear {
-  height: 50px;
-  width: 50px;
-  position: absolute;
-  top: 18px;
-  right: 20px;
+  grid-column: 3;
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--touch-min);
+  height: var(--touch-min);
+  min-width: var(--touch-min);
+  min-height: var(--touch-min);
+  padding: 0;
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background-color var(--transition-fast),
+    color var(--transition-fast), border-color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+#settingsGear:hover,
+#settingsGear:focus-visible {
+  background: var(--accent-muted);
+  color: var(--accent);
+  border-color: var(--accent);
   outline: none;
-  border: 0;
-  border-radius: 10px;
-  background-repeat: no-repeat;
-  background-size: cover;
+}
+
+#settingsGear:active {
+  transform: scale(0.96);
+}
+
+#settingsGear svg,
+#settingsGear img {
+  width: 1.35rem;
+  height: 1.35rem;
+  pointer-events: none;
+}
+
+#settingsGear img {
+  /* For legacy <img> gear icons */
+  filter: none;
+  opacity: 0.85;
+}
+
+/* ============================================================================
+   6. SOCIAL LINKS
+   ============================================================================ */
+.socials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+}
+
+.socialLink,
+footer a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--touch-min);
+  height: var(--touch-min);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--text-secondary);
+  transition: background-color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.socialLink:hover,
+footer a:hover {
+  background: var(--bg-muted);
+  transform: translateY(-1px);
+}
+
+.socialLink img,
+footer a img {
+  height: 1.75rem;
+  width: 1.75rem;
+  object-fit: contain;
+}
+
+/* ============================================================================
+   7. BUTTONS
+   ============================================================================ */
+.btn,
+.button,
+.game-button,
+.closeWinBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--touch-min);
+  min-width: var(--touch-min);
+  padding: 0.75rem 1.5rem;
+  margin: var(--space-2) auto;
+  font-family: inherit;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.2;
+  text-align: center;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  user-select: none;
+  transition: background-color var(--transition-fast),
+    border-color var(--transition-fast), color var(--transition-fast),
+    box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+.btn:active,
+.button:active,
+.game-button:active,
+.closeWinBtn:active {
+  transform: scale(0.98);
+}
+
+.btn:focus-visible,
+.button:focus-visible,
+.game-button:focus-visible,
+.closeWinBtn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Primary */
+.btn-primary,
+.button,
+.game-button {
+  background-color: var(--accent);
+  color: var(--accent-contrast);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover,
+.button:hover,
+.game-button:hover {
+  background-color: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+/* Secondary */
+.btn-secondary,
+.closeWinBtn {
+  background-color: var(--bg-muted);
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.btn-secondary:hover,
+.closeWinBtn:hover {
+  background-color: var(--border);
+  border-color: var(--border-strong);
+}
+
+/* Ghost */
+.btn-ghost {
+  background-color: transparent;
+  color: var(--text-secondary);
+  border-color: transparent;
+}
+
+.btn-ghost:hover {
+  background-color: var(--bg-muted);
+  color: var(--text-primary);
+}
+
+.btn-block {
+  display: flex;
+  width: 100%;
+  max-width: 20rem;
+}
+
+/* ============================================================================
+   8. FORMS
+   ============================================================================ */
+label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  width: 100%;
+  margin-bottom: var(--space-3);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  text-align: left;
+}
+
+label:has(input[type="checkbox"]),
+label:has(input[type="radio"]) {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  width: 100%;
+  margin-bottom: var(--space-3);
+  text-align: left;
+}
+
+.form-row > span,
+.form-label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+}
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+select,
+textarea {
+  width: 100%;
+  min-height: var(--touch-min);
+  padding: 0.65rem 0.85rem;
+  font-family: inherit;
+  font-size: var(--font-size-md);
+  color: var(--text-primary);
+  background: var(--bg-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-fast),
+    box-shadow var(--transition-fast), background-color var(--transition);
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-muted);
+  background: var(--bg-surface);
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  width: 1.25rem;
+  height: 1.25rem;
+  min-width: 1.25rem;
+  accent-color: var(--accent);
   cursor: pointer;
 }
 
-/* Main
-   ====== */
-main {
+/* Theme toggle group */
+.theme-toggle {
   display: flex;
-  min-height: var(--main-min-height);
-  position: relative;
-  box-sizing: border-box;
-  background-color: var(--main-bgc);
-  flex-direction: column;
+  width: 100%;
+  gap: var(--space-2);
+  padding: var(--space-1);
+  background: var(--bg-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.theme-toggle label {
+  flex: 1;
+  flex-direction: row;
   justify-content: center;
-  padding: 30px 5px 0;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0;
+  min-height: var(--touch-min);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-weight: var(--font-weight-medium);
+  color: var(--text-muted);
+  transition: background-color var(--transition-fast),
+    color var(--transition-fast);
 }
 
-/* Footer
-   ======== */
-footer {
-  display: grid;
-  height: 85px;
-  margin-bottom: 20px;
-  border-bottom-left-radius: var(--app-br);
-  border-bottom-right-radius: var(--app-br);
-  background-color: var(--footer-bgc);
-  place-items: center;
+.theme-toggle label:has(input:checked),
+.theme-toggle label.is-active {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
+  font-weight: var(--font-weight-semibold);
 }
 
-footer a {
-  text-decoration: none;
+.theme-toggle input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+  height: 0;
 }
 
-footer a img {
-  height: 40px;
+/* ============================================================================
+   9. MODALS (Settings / Rules)
+   ============================================================================ */
+#settingsWindowContainer {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  background-color: var(--bg-overlay);
+  overflow: auto;
+  padding: var(--space-4);
+  align-items: center;
+  justify-content: center;
 }
 
-/* Social icons (GitHub, Gmail, etc.)
-   =================================== */
-.socialLink {
-  display: inline-block;
-  text-decoration: none;
+#settingsWindowContainer.is-open,
+#settingsWindowContainer[style*="block"],
+#settingsWindowContainer[style*="flex"] {
+  display: flex !important;
 }
 
-.socialLink img {
-  height: 40px;
-}
-
-/* ----------------------------------------------------------------------------
-   Settings / Rules modals
-   ---------------------------------------------------------------------------- */
 #settingsWindow,
 #rulesWindow {
   display: none;
-  height: 400px;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: var(--settings-window-bg);
-  border-radius: var(--app-br);
-  box-shadow: 0 0 60px black;
-  z-index: 9999;
-  overflow: hidden;
-  padding: 10px;
+  z-index: var(--z-modal);
+  width: min(100% - 2 * var(--space-4), 28rem);
+  max-height: min(90dvh, 40rem);
+  overflow: auto;
+  padding: var(--space-5) var(--space-4);
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+  transition: background-color var(--transition), color var(--transition),
+    border-color var(--transition);
+}
+
+/* When opened via inline style or class */
+#settingsWindow.is-open,
+#settingsWindow[style*="block"],
+#settingsWindow[style*="flex"],
+#rulesWindow.is-open,
+#rulesWindow[style*="block"],
+#rulesWindow[style*="flex"] {
+  display: flex !important;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-3);
+}
+
+/* Nested inside overlay container: relative layout */
+#settingsWindowContainer #settingsWindow {
+  position: relative;
+  top: auto;
+  left: auto;
+  transform: none;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-3);
+  margin: auto;
+  width: min(100%, 28rem);
+}
+
+#settingsWindow h2,
+#rulesWindow h2 {
+  margin-bottom: var(--space-2);
   text-align: center;
 }
 
-/* Full-viewport dimmed overlay (used by visual-memory) */
-#settingsWindowContainer {
-  display: none;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
+.modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  justify-content: center;
+  margin-top: var(--space-3);
+}
+
+.modal-actions .btn,
+.modal-actions .button,
+.modal-actions .closeWinBtn {
+  margin: 0;
+  flex: 1 1 auto;
+  min-width: 7rem;
+}
+
+/* Body scroll lock while modal open */
+body.modal-open {
   overflow: hidden;
+}
+
+body.modal-open::before {
+  content: "";
   position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 15;
+  inset: 0;
+  z-index: calc(var(--z-modal) - 1);
+  background: var(--bg-overlay);
+  pointer-events: none;
 }
 
-/* ----------------------------------------------------------------------------
-   Buttons
-   ---------------------------------------------------------------------------- */
-.button,
-.game-button,
-.closeWinBtn {
-  margin: 20px auto;
-  background-color: var(--button-bg);
-  font-size: 30px;
-  font-weight: 600;
-  color: var(--button-color);
-  border: 0;
-  border-radius: var(--button-radius);
-  outline: none;
-  cursor: pointer;
+/* When using container overlay, suppress body::before double-dim */
+body.modal-open:has(#settingsWindowContainer[style*="block"])::before,
+body.modal-open:has(#settingsWindowContainer[style*="flex"])::before,
+body.modal-open:has(#settingsWindowContainer.is-open)::before {
+  display: none;
 }
 
-.button:hover,
-.game-button:hover,
-.closeWinBtn:hover {
-  background-color: var(--button-hover-bg);
-  transition: background 0.2s linear;
-}
-
-/* Modal close buttons are slightly smaller */
-.closeWinBtn {
-  display: block;
-  height: 50px;
-  width: 100px;
-  font-size: 16px;
-  border-radius: 5px;
-}
-
-/* ----------------------------------------------------------------------------
-   Common form / utility elements
-   ---------------------------------------------------------------------------- */
-label {
-  display: block;
-}
-
-/* Progress bar (mind-calc and future games) */
+/* ============================================================================
+   10. PROGRESS BAR
+   ============================================================================ */
 progress {
   -webkit-appearance: none;
   appearance: none;
   display: none;
   width: 100%;
-  height: 12px;
+  height: 0.65rem;
   border: 0;
-  color: red;
-  margin-top: 0;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--bg-muted);
 }
 
 progress[value]::-webkit-progress-bar {
-  background-color: #eee;
-  border-radius: 2px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+  background-color: var(--bg-muted);
+  border-radius: var(--radius-sm);
 }
 
 progress[value]::-webkit-progress-value {
-  background: -webkit-linear-gradient(
-      top,
-      rgba(255, 255, 255, 0.25),
-      rgba(0, 0, 0, 0.25)
-    ),
-    -webkit-linear-gradient(left, #fd3d5e, #9005e6);
-  border-radius: 2px;
-  background-size: 35px 20px, 100% 100%, 100% 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+  border-radius: var(--radius-sm);
+  transition: width var(--transition);
+}
+
+progress[value]::-moz-progress-bar {
+  background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+  border-radius: var(--radius-sm);
+}
+
+/* ============================================================================
+   11. GAME CONTENT HELPERS
+   ============================================================================ */
+#gameRules {
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+  text-align: left;
+  padding: var(--space-3) var(--space-4);
+  background: var(--bg-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+#gameRules ol {
+  margin-top: var(--space-2);
+}
+
+#playground {
+  width: 100%;
+  min-height: 2rem;
+}
+
+/* ============================================================================
+   12. UTILITY CLASSES
+   ============================================================================ */
+.u-hidden {
+  display: none !important;
+}
+
+.u-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.u-mt-0 {
+  margin-top: 0 !important;
+}
+
+.u-mb-0 {
+  margin-bottom: 0 !important;
+}
+
+.u-text-muted {
+  color: var(--text-muted);
+}
+
+.u-text-secondary {
+  color: var(--text-secondary);
+}
+
+.u-full-width {
+  width: 100%;
+}
+
+/* ============================================================================
+   13. RESPONSIVE
+   ============================================================================ */
+@media (max-width: 480px) {
+  :root {
+    --app-width: min(100% - 2 * var(--space-3), var(--app-max-width));
+    --header-height: 3.5rem;
+    --main-min-height: min(55vh, 24rem);
+  }
+
+  body {
+    padding: var(--space-3) 0 var(--space-4);
+  }
+
+  header.appElement,
+  header.app,
+  header,
+  main.appElement,
+  main.app,
+  main,
+  footer.appElement,
+  footer.app,
+  footer {
+    padding-left: var(--space-3);
+    padding-right: var(--space-3);
+  }
+
+  header h1 {
+    font-size: var(--font-size-md);
+  }
+
+  .btn-block,
+  #playBtn {
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 1200px) {
+  :root {
+    --app-max-width: 48rem;
+  }
+}
+
+@media (min-width: 1800px) {
+  :root {
+    --app-max-width: 52rem;
+    --font-size-md: 1.0625rem;
+  }
+}
+
+/* Half / third screen: keep shell fluid via --app-width */
+@media (max-width: 900px) and (min-width: 481px) {
+  :root {
+    --app-max-width: 36rem;
+  }
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
 }

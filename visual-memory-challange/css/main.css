@@ -1,28 +1,61 @@
-/* Visual Memory Challenge — game-specific styles
-   ================================================= */
+/* ============================================================================
+   Visual Memory Challenge — game-specific styles
+   Accent: cyan / teal
+   Shared shell: ../../css/shared-ui.css
+   ============================================================================ */
 
-/* Play button — game accent colors */
-#playBtn {
-  height: 100px;
-  width: 200px;
-  color: #023c40;
-  background: #0ad3ff;
+:root,
+[data-theme="light"] {
+  --accent: #0891b2;
+  --accent-hover: #0e7490;
+  --accent-muted: #cffafe;
+  --accent-contrast: #ffffff;
 }
 
-#playBtn:hover {
-  background: #78ffd6;
+[data-theme="dark"] {
+  --accent: #22d3ee;
+  --accent-hover: #67e8f9;
+  --accent-muted: #164e63;
+  --accent-contrast: #0f172a;
+}
+
+/* Wider canvas for spatial memory */
+:root {
+  --app-max-width: 52rem;
+  --main-min-height: min(70vh, 36rem);
+}
+
+#playBtn {
+  width: min(100%, 16rem);
+  min-height: 3.5rem;
+  font-size: var(--font-size-lg);
 }
 
 #saveLocalSettings {
   display: none;
 }
 
-#playground {
-  position: relative;
+#saveLocalSettings[style*="block"] {
+  display: inline-flex !important;
 }
 
-/* Game elements */
+#playground {
+  position: relative;
+  width: 100%;
+  min-height: 12rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--bg-muted);
+  overflow: hidden;
+  touch-action: none;
+}
+
+/* Game elements — drawn rectangles */
 .drawedRectacngle {
   position: absolute;
-  border: 2px solid black;
+  border: 2px solid var(--text-primary);
+  background: color-mix(in srgb, var(--accent) 25%, transparent);
+  border-radius: var(--radius-sm);
+  box-sizing: border-box;
+  pointer-events: none;
 }

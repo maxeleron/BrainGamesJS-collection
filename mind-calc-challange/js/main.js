@@ -8,6 +8,11 @@ const header = document.querySelector("header");
 const footer = document.querySelector("footer");
 const main = document.querySelector("main");
 
+// Theme (shared across collection)
+if (window.BGJSTheme) {
+  window.BGJSTheme.initTheme();
+}
+
 /*Concentration mode functionality - starts*/
 concentrationBtn.onclick = function () {
   header.style.display = "none";
@@ -16,10 +21,11 @@ concentrationBtn.onclick = function () {
   backToFullMode.style.visibility = "visible";
 };
 
-backToFullMode.onclick = function () {
-  header.style.display = "block";
-  footer.style.display = "block";
-  main.style.margin = "0px auto";
+backToFullMode.onclick = function (event) {
+  if (event) event.preventDefault();
+  header.style.display = "";
+  footer.style.display = "";
+  main.style.margin = "";
   backToFullMode.style.visibility = "hidden";
 };
 /*ends - concentration mode functionality */
@@ -37,12 +43,24 @@ const settingsEntry = document.getElementById("settingsGear");
 const closeRulesWindow = document.getElementById("closeRulesWindow");
 const closeSettingsWindow = document.getElementById("closeSettingsWindow");
 
+function isUiOpen(windowName) {
+  var d = windowName.style.display;
+  return d === "block" || d === "flex";
+}
+
 //Declaring functions to open and close these windows
 function openUiWindow(windowName) {
-  windowName.style.display = "block";
+  windowName.style.display = "flex";
+  document.body.classList.add("modal-open");
+  if (windowName === settingsWindow && window.BGJSTheme) {
+    window.BGJSTheme.syncThemeControls();
+  }
 }
 function closeUiWindow(windowName) {
   windowName.style.display = "none";
+  if (!isUiOpen(rulesWindow) && !isUiOpen(settingsWindow)) {
+    document.body.classList.remove("modal-open");
+  }
 }
 
 //Adding open events on clicks
@@ -63,19 +81,11 @@ closeSettingsWindow.onclick = function () {
   closeUiWindow(settingsWindow);
 };
 
-/*.onclick = openUiWindow(settingsWindow);*/
+window.addEventListener("keydown", function (event) {
+  if (event.key === "Escape" || event.keyCode === 27) {
+    closeUiWindow(rulesWindow);
+    closeUiWindow(settingsWindow);
+  }
+});
 
 /*ends - hidden windows (rules and settings) functionality*/
-
-// function concetrationSwitcher() {
-//   if (concentrationMode == false) {
-//   }
-// }
-/*===================*/
-
-// playBtn.addEventListener("click", function () {}); //answerCommited(userAnswer.value)
-// function answerCommited() {
-//   /*if (answerStr == "100") alert("guci");
-//   else alert("soso");*/
-//   alert(userAnswer.value);
-// }

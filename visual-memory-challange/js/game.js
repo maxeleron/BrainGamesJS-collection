@@ -32,7 +32,8 @@ const playBtnHandleFunc = () => {
   playground.innerHTML = "";
   playground.style.height = "400px";
   playground.style.width = "100%";
-  playground.style.background = "white";
+  // Theme-aware surface (shared token); avoid hard-coded white for dark mode
+  playground.style.background = "var(--bg-surface)";
   playBtn.innerText = "I Remembered";
 
   gameRules.innerText = "";

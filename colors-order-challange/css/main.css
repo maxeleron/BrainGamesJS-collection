@@ -1,69 +1,153 @@
-/* Colors Order Challenge — game-specific styles
-   ================================================ */
+/* ============================================================================
+   Colors Order Challenge — game-specific styles
+   Accent: violet / indigo
+   Shared shell: ../../css/shared-ui.css
+   ============================================================================ */
 
-/* Tile size classes (choosing by Select tag)
-   =========================================== */
-.gameTile {
-  display: block;
-  margin: 7px auto;
-  box-sizing: border-box;
-  border-radius: 5px;
+:root,
+[data-theme="light"] {
+  --accent: #5b21b6;
+  --accent-hover: #4c1d95;
+  --accent-muted: #ede9fe;
+  --accent-contrast: #ffffff;
 }
 
+[data-theme="dark"] {
+  --accent: #a78bfa;
+  --accent-hover: #c4b5fd;
+  --accent-muted: #2e1065;
+  --accent-contrast: #0f172a;
+}
+
+/* ----------------------------------------------------------------------------
+   Playground & tiles
+   ---------------------------------------------------------------------------- */
+#playground {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-2) 0;
+}
+
+.gameTile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  box-sizing: border-box;
+  border-radius: var(--radius-md);
+  border: 2px solid transparent;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+    border-color var(--transition-fast);
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Tile sizes — fluid for mobile / 4K */
 .smallTile {
-  height: 100px;
-  line-height: 100px;
-  font-size: 40px;
+  height: clamp(3.5rem, 8vw, 5rem);
+  min-height: var(--touch-min);
+  font-size: var(--font-size-lg);
 }
 
 .mediumTile {
-  height: 150px;
-  line-height: 150px;
-  font-size: 60px;
+  height: clamp(4.5rem, 12vw, 7rem);
+  font-size: var(--font-size-xl);
 }
 
 .largeTile {
-  height: 180px;
-  line-height: 180px;
-  font-size: 60px;
+  height: clamp(5.5rem, 15vw, 9rem);
+  font-size: var(--font-size-2xl);
 }
 
 /* Tile formats */
 .narrowTile {
-  width: 25%;
+  width: min(28%, 8rem);
+  min-width: 4rem;
 }
 
 .normalTile {
-  width: 50%;
+  width: min(55%, 16rem);
+  min-width: 6rem;
 }
 
 .wideTile {
   width: 100%;
+  max-width: 100%;
 }
 
-/* Play button size */
+/* Sortable (drag) state */
+.sortable {
+  border: 2px dashed var(--text-primary);
+  cursor: grab;
+  box-shadow: var(--shadow-md);
+}
+
+.sortable:active {
+  cursor: grabbing;
+}
+
+.sortable.sortable-ghost,
+.sortable-ghost {
+  opacity: 0.45;
+}
+
+.sortable-chosen {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-lg);
+  z-index: 2;
+}
+
+/* Answer feedback */
+.rightAnswer,
+.wrongAnswer {
+  border-width: 2px;
+  border-style: solid;
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.rightAnswer {
+  border-color: var(--success);
+  box-shadow: 0 0 0 2px var(--success-muted);
+}
+
+.rightAnswer::before {
+  content: "✔";
+  margin-right: var(--space-2);
+}
+
+.wrongAnswer {
+  border-color: var(--error);
+  box-shadow: 0 0 0 2px var(--error-muted);
+}
+
+.wrongAnswer::before {
+  content: "❌";
+  margin-right: var(--space-2);
+}
+
+/* ----------------------------------------------------------------------------
+   Primary action button
+   ---------------------------------------------------------------------------- */
 #playBtn {
-  height: 100px;
-  width: 200px;
+  width: min(100%, 16rem);
+  min-height: 3.5rem;
+  font-size: var(--font-size-lg);
+  margin-top: var(--space-3);
 }
 
+/* Save settings — hidden until a change is made (JS toggles display) */
 #saveLocalSettings {
   display: none;
 }
 
-.rightAnswer,
-.wrongAnswer {
-  border: 2px solid black;
-}
-
-.rightAnswer:before {
-  content: "✔";
-}
-
-.wrongAnswer:before {
-  content: "❌";
-}
-
-.sortable {
-  border: 3px dashed black;
+/* When JS sets display:block, keep button styling intact */
+#saveLocalSettings[style*="block"] {
+  display: inline-flex !important;
 }

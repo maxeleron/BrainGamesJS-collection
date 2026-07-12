@@ -1,86 +1,121 @@
-﻿<!DOCTYPE html>
-<html lang="eng">
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
-    <title>COC</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Colors Order Challenge</title>
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem("bgjs_theme") || "light";
+                document.documentElement.setAttribute("data-theme", t === "dark" ? "dark" : "light");
+            } catch (e) {
+                document.documentElement.setAttribute("data-theme", "light");
+            }
+        })();
+    </script>
     <link rel="stylesheet" href="../css/shared-ui.css">
-    <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="icon" href="materials/favicon.ico">
 </head>
 
 <body>
     <header class="appElement">
-        <h1>Colors Order Challange</h1>
-        <button id="settingsGear">
-            <!-- <img src="materials/settings.svg" title="Settings" alt="settings button"> -->
+        <h1>Colors Order Challenge</h1>
+        <button type="button" id="settingsGear" title="Settings" aria-label="Open settings">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path
+                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z">
+                </path>
+            </svg>
         </button>
     </header>
+
     <main class="appElement">
         <div id="gameRules">
             Game is simple:
             <ol>
                 <li>Remember order of color tiles</li>
-                <li>Restore order after shufling</li>
+                <li>Restore order after shuffling</li>
                 <li>More options in settings</li>
             </ol>
         </div>
 
         <div id="playground"></div>
 
-        <button id="playBtn" class="button">Play</button>
-
+        <button type="button" id="playBtn" class="button btn btn-primary btn-block">Play</button>
     </main>
+
     <footer class="appElement">
         <section class="socials">
             <a href="mailto:maxeleron@gmail.com" class="socialLink" title="My Mail">
                 <img src="materials/gmail_icon.png" alt="Mail link">
             </a>
-
-            <a href="https://github.com/maxeleron" class="socialLink" title="My GitHub accaunt">
+            <a href="https://github.com/maxeleron" class="socialLink" title="My GitHub account">
                 <img src="materials/GitHub-Mark-64px.png" alt="GitHub profile link">
             </a>
         </section>
     </footer>
 
-    <div id="settingsWindow" class='appElement'>
-        <h2>Settings</h2>
-        <label for="tileSize"> Tile size:
+    <div id="settingsWindow" class="appElement" role="dialog" aria-labelledby="settingsTitle" aria-modal="true">
+        <h2 id="settingsTitle">Settings</h2>
+
+        <label for="tilesAmount">Tiles amount
             <input type="number" id="tilesAmount" max="36" min="2">
         </label>
 
-        <label for="tileSize"> Tile size:</label>
-        <select id="tileSize">
-            <option value="small">Small</option>
-            <option value="medium">Medium</option>
-            <option value="large">Large</option>
-        </select>
+        <div class="form-row">
+            <span class="form-label" id="tileSizeLabel">Tile size</span>
+            <select id="tileSize" aria-labelledby="tileSizeLabel">
+                <option value="small">Small</option>
+                <option value="medium">Medium</option>
+                <option value="large">Large</option>
+            </select>
+        </div>
 
-        <label for="tileFormat"> Tile format:</label>
-        <select id="tileFormat">
-            <option value="narrow">Narrow</option>
-            <option value="normal">Normal</option>
-            <option value="wide">Wide</option>
-        </select>
+        <div class="form-row">
+            <span class="form-label" id="tileFormatLabel">Tile format</span>
+            <select id="tileFormat" aria-labelledby="tileFormatLabel">
+                <option value="narrow">Narrow</option>
+                <option value="normal">Normal</option>
+                <option value="wide">Wide</option>
+            </select>
+        </div>
 
-        <label for="gameRulesToggle"> Game Rules:
-            <input type="checkbox" id="gameRulesToggle" />
+        <label for="gameRulesToggle">
+            <input type="checkbox" id="gameRulesToggle">
+            Show game rules
         </label>
-        <button id="restoreSettings" class='button'>Restore defaults</button>
-        <button id="saveLocalSettings" class='button'>Save Settings</button>
 
-        <button id="closeSettingsWindow" class="button">Close</button>
+        <div class="form-row">
+            <span class="form-label">Theme</span>
+            <div class="theme-toggle" role="radiogroup" aria-label="Color theme">
+                <label>
+                    <input type="radio" name="bgjs_theme" value="light" checked>
+                    Light
+                </label>
+                <label>
+                    <input type="radio" name="bgjs_theme" value="dark">
+                    Dark
+                </label>
+            </div>
+        </div>
+
+        <div class="modal-actions">
+            <button type="button" id="restoreSettings" class="button btn btn-secondary">Restore defaults</button>
+            <button type="button" id="saveLocalSettings" class="button btn btn-primary">Save Settings</button>
+            <button type="button" id="closeSettingsWindow" class="button btn btn-secondary">Close</button>
+        </div>
     </div>
 
-    <!-- SortableJS (https://github.com/SortableJS/Sortable) via jsDelivr -->
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js" defer></script>
-
+    <script src="../js/theme.js" defer></script>
     <script src="js/main.js" defer></script>
     <script src="js/colors-order-engine.js" defer></script>
-
     <script src="js/game.js" defer></script>
-
 </body>
 
 </html>

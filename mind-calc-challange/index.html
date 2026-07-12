@@ -1,96 +1,128 @@
-﻿<!DOCTYPE html>
-<html lang="eng">
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
-    <title>MCC</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mind Calc Challenge</title>
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem("bgjs_theme") || "light";
+                document.documentElement.setAttribute("data-theme", t === "dark" ? "dark" : "light");
+            } catch (e) {
+                document.documentElement.setAttribute("data-theme", "light");
+            }
+        })();
+    </script>
     <link rel="stylesheet" href="../css/shared-ui.css">
-    <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="icon" href="materials/favicon.ico">
 </head>
 
 <body>
-    <header>
+    <header class="appElement">
         <h1 title="click to see rules">Mind Calc Challenge</h1>
-        <button id="concentrationBtn" title="Concentration mode">C</button>
-        <img id="settingsGear" src="materials/settings.svg" title="Settings" alt="settings button">
+        <button type="button" id="concentrationBtn" class="btn btn-ghost" title="Concentration mode"
+            aria-label="Concentration mode">C</button>
+        <button type="button" id="settingsGear" title="Settings" aria-label="Open settings">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path
+                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z">
+                </path>
+            </svg>
+        </button>
     </header>
-    <main id="main">
-        <div id="playground">
-            --
-        </div>
-        <input type="text" name="userAnswer" id="userAnswer" placeholder="answer" autocomplete="off" maxlength="3"
-            onkeyup="this.value = this.value.replace (/[^0-9+]/, '')">
 
-        <button id="playBtn" class="game-button">Play</button>
-        <button id="nextBtn" class="game-button">Next</button>
-        <button id="commitBtn" class="game-button">Commit Answer</button>
+    <main id="main" class="appElement">
+        <div id="playground">--</div>
+        <input type="text" name="userAnswer" id="userAnswer" placeholder="answer" autocomplete="off" maxlength="3"
+            inputmode="numeric" onkeyup="this.value = this.value.replace (/[^0-9+]/, '')">
+
+        <button type="button" id="playBtn" class="game-button btn btn-primary btn-block">Play</button>
+        <button type="button" id="nextBtn" class="game-button btn btn-primary btn-block">Next</button>
+        <button type="button" id="commitBtn" class="game-button btn btn-primary btn-block">Commit Answer</button>
 
         <progress max="100" value="0"></progress>
     </main>
 
-    <footer>
-        <a href="mailto:maxeleron@gmail.com" id="ownersMail" title="My Mail">
-            <img src="materials/gmail_icon.png" alt="Mail link">
-        </a>
-
-        <a href="https://github.com/maxeleron" id="ownersGitHub" title="My GitHub accaunt">
-            <img src="materials/GitHub-Mark-64px.png" alt="GitHub profile link">
-        </a>
+    <footer class="appElement">
+        <section class="socials">
+            <a href="mailto:maxeleron@gmail.com" id="ownersMail" class="socialLink" title="My Mail">
+                <img src="materials/gmail_icon.png" alt="Mail link">
+            </a>
+            <a href="https://github.com/maxeleron" id="ownersGitHub" class="socialLink" title="My GitHub account">
+                <img src="materials/GitHub-Mark-64px.png" alt="GitHub profile link">
+            </a>
+        </section>
     </footer>
-    <div id="rulesWindow">
-        <h2>Game Rules</h2>
 
-        <button id="closeRulesWindow" class="closeWinBtn">Close</button>
+    <div id="rulesWindow" role="dialog" aria-labelledby="rulesTitle" aria-modal="true">
+        <h2 id="rulesTitle">Game Rules</h2>
+        <p class="u-text-secondary">Click the title anytime to reopen these rules. Solve color-based arithmetic as fast
+            as you can.</p>
+        <button type="button" id="closeRulesWindow" class="closeWinBtn btn btn-secondary">Close</button>
     </div>
-    <div id="settingsWindow">
-        <h2>Settings</h2>
+
+    <div id="settingsWindow" role="dialog" aria-labelledby="mccSettingsTitle" aria-modal="true">
+        <h2 id="mccSettingsTitle">Settings</h2>
         <table id="settingsTable">
             <tr>
                 <td>Amount of questions</td>
-                <td><input type="number" name="" id="" value="10"></td>
+                <td><input type="number" value="10" min="1" max="50"></td>
             </tr>
             <tr>
                 <td colspan="2">Colors and values</td>
             </tr>
             <tr id="1RuleRow">
                 <td></td>
-                <td><input type="number" name="" id="" value="+2"></td>
+                <td><input type="number" value="+2"></td>
             </tr>
-
             <tr>
                 <td></td>
                 <td></td>
             </tr>
-
             <tr>
                 <td>
                     <label for="hintsCheckbox">Turn ON / OFF hints:</label>
                 </td>
                 <td>
-                    <input type="checkbox" name="" id="hintsCheckbox" value="checked">
+                    <input type="checkbox" id="hintsCheckbox" value="checked">
                 </td>
             </tr>
-
             <tr>
                 <td>
-                    <label for="progressCheckbox">Turn ON / OFF hints:</label>
+                    <label for="progressCheckbox">Turn ON / OFF progress:</label>
                 </td>
                 <td>
-                    <input type="checkbox" name="" id="progressCheckbox" value="checked">
+                    <input type="checkbox" id="progressCheckbox" value="checked">
                 </td>
             </tr>
-
         </table>
 
-        <button id="saveLocalSettings"></button>
+        <div class="form-row">
+            <span class="form-label">Theme</span>
+            <div class="theme-toggle" role="radiogroup" aria-label="Color theme">
+                <label>
+                    <input type="radio" name="bgjs_theme" value="light" checked>
+                    Light
+                </label>
+                <label>
+                    <input type="radio" name="bgjs_theme" value="dark">
+                    Dark
+                </label>
+            </div>
+        </div>
 
-        <button id="closeSettingsWindow" class="closeWinBtn">Close</button>
+        <button type="button" id="saveLocalSettings" class="u-hidden" aria-hidden="true"></button>
+        <button type="button" id="closeSettingsWindow" class="closeWinBtn btn btn-secondary">Close</button>
     </div>
 
-    <a id="backToFullMode">Back to full version</a>
+    <a id="backToFullMode" href="#">Back to full version</a>
 
+    <script src="../js/theme.js"></script>
     <script src="js/mind-calc-engine.js"></script>
     <script src="js/game.js"></script>
     <script src="js/main.js"></script>

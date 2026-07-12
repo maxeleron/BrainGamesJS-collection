@@ -1,14 +1,13 @@
-# BrainGamesJS-collection
+# BrainGamesJS-collection [EN/Global localization]
 
-A bench of javascript-based browser games, that has next purposes
-
+A bunch of javascript-based browser games, that has next purposes:
 1. get interesting mind training games;
-2. create beatiful UI design;
-3. test my js knowledges.
+2. create beautiful UI design;
+3. test my JS knowledge.
 
-## 1. Mind Calc Challange
+## 1. Mind Calc Challenge
 
-**Mind Calc Challange** - is a simple game where player should write modified number in relation of color of showed number _(for example: if num 43 shows with red color user shoud count +3 and write 46, each color will have different rule)_
+**Mind Calc Challenge** - is a simple game where player should write modified number in relation of color of showed number _(for example: if num 43 shows with red color user shoud count +3 and write 46, each color will have different rule)_
 
 **Features (Mind Calc)**:
 
@@ -21,9 +20,9 @@ A bench of javascript-based browser games, that has next purposes
 - [ ] _Style Settings and Game Rules windows_
 - [ ] _User can change settings in session_
 - [ ] _User can save settings locally_
-- [ ] _Add OOP principles to mind-calc-engine.js_
+*_Maybe Features (Mind Calc)_*
 
-## 2. Colors Order Challange
+## 2. Colors Order Challenge
 
 **Colors Order Challenge** - is a simple graphic game where player should use their memory to memorize order of colors boxes _(for example: first colors shown [**green**, **red**, **yellow**], after shuffle collors could be displayed [**yellow**, **green**, **red**], after User has to manipulate colors boxes (with drag&drop) to recover colors` order)_
 
@@ -40,14 +39,14 @@ A bench of javascript-based browser games, that has next purposes
 - [ ] _Add drag & drop to solve the quiz_
 - [ ] _User can save settings locally_
 - [ ] _Add OOP principles to colors-order-engine.js_
-- [ ] _Dublicate protection in quiz_
+- [ ] _Duplicate protection in quiz_
 - [ ] _User can choose size of tiles_
 - [ ] _User can choose amount of tiles_
 - [ ] _Timer for quiz_
 
-## 3. String Search Challange
+## 3. String Search Challenge
 
-**String Search Challange** - is a simple visual game where player should use sight to quickly search and _(for example: User choose word length from 2 to 6 letters, and font size, and as fast as their can )_
+**String Search Challenge** - is a simple visual game where player should use sight to quickly search and _(for example: User choose word length from 2 to 6 letters, and font size, and as fast as their can )_
 
 **Features (String Search)**:
 
