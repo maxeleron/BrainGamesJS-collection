@@ -17,10 +17,12 @@
   --bg-page: #f0f2f5;
   --bg-surface: #ffffff;
   --bg-elevated: #ffffff;
-  --bg-header: #e8ebf0;
-  --bg-footer: #e4e7ec;
+  /* Header/footer intentionally darker than page/surface for clear separation */
+  --bg-header: #cfd5de;
+  --bg-footer: #c5ccd6;
   --bg-muted: #f4f6f8;
   --bg-overlay: rgba(15, 23, 42, 0.48);
+  --bg-social: transparent;
 
   /* Text */
   --text-primary: #0f172a;
@@ -119,6 +121,8 @@
   --bg-footer: #121821;
   --bg-muted: #1a2230;
   --bg-overlay: rgba(0, 0, 0, 0.62);
+  /* Social buttons: elevated violet tint for icon contrast in dark mode */
+  --bg-social: color-mix(in srgb, var(--accent-muted) 70%, var(--bg-elevated));
 
   --text-primary: #f1f5f9;
   --text-secondary: #cbd5e1;
@@ -234,9 +238,7 @@ body {
 header.appElement,
 header.app,
 header {
-  display: grid;
-  grid-template-columns: var(--touch-min) 1fr var(--touch-min);
-  align-items: center;
+  display: block;
   width: var(--app-width);
   max-width: var(--app-max-width);
   min-height: var(--header-height);
@@ -252,12 +254,37 @@ header {
     color var(--transition);
 }
 
+/* True absolute center: title ignores right-side action buttons */
 header h1 {
-  grid-column: 2;
-  justify-self: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: max-content;
+  max-width: calc(100% - 2 * var(--touch-min) - 2 * var(--space-5));
+  margin: 0;
+  padding: 0 var(--space-2);
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-semibold);
   letter-spacing: -0.02em;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: auto;
+  z-index: 1;
+}
+
+/* Right-side header actions (settings, concentration, etc.) */
+.header-actions {
+  position: absolute;
+  right: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  z-index: 2;
 }
 
 main.appElement,
@@ -303,11 +330,14 @@ footer {
 }
 
 /* ============================================================================
-   5. SETTINGS GEAR
+   5. SETTINGS GEAR (and other header icon buttons)
    ============================================================================ */
 #settingsGear {
-  grid-column: 3;
-  justify-self: end;
+  position: absolute;
+  right: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -327,6 +357,12 @@ footer {
     transform var(--transition-fast);
 }
 
+/* When grouped in .header-actions, drop absolute positioning */
+.header-actions #settingsGear {
+  position: static;
+  transform: none;
+}
+
 #settingsGear:hover,
 #settingsGear:focus-visible {
   background: var(--accent-muted);
@@ -336,6 +372,10 @@ footer {
 }
 
 #settingsGear:active {
+  transform: translateY(-50%) scale(0.96);
+}
+
+.header-actions #settingsGear:active {
   transform: scale(0.96);
 }
 
@@ -372,14 +412,18 @@ footer a {
   border-radius: var(--radius-md);
   text-decoration: none;
   color: var(--text-secondary);
+  background: var(--bg-social);
+  border: 1px solid transparent;
   transition: background-color var(--transition-fast),
-    transform var(--transition-fast);
+    transform var(--transition-fast), border-color var(--transition-fast),
+    color var(--transition-fast);
 }
 
 .socialLink:hover,
 footer a:hover {
   background: var(--bg-muted);
   transform: translateY(-1px);
+  color: var(--text-primary);
 }
 
 .socialLink img,
@@ -387,6 +431,35 @@ footer a img {
   height: 1.75rem;
   width: 1.75rem;
   object-fit: contain;
+}
+
+/* Inline SVG social icons (envelope, GitHub) */
+.socialLink svg,
+footer a svg {
+  width: 1.35rem;
+  height: 1.35rem;
+  flex-shrink: 0;
+}
+
+/* Dark mode: lighten raster GitHub mark; elevate social chips */
+[data-theme="dark"] .socialLink,
+[data-theme="dark"] footer a {
+  background: var(--bg-social);
+  border-color: var(--border);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .socialLink:hover,
+[data-theme="dark"] footer a:hover {
+  background: var(--accent-muted);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+[data-theme="dark"] .socialLink img[alt*="GitHub"],
+[data-theme="dark"] footer a img[alt*="GitHub"] {
+  filter: invert(1) brightness(1.15);
+  opacity: 0.95;
 }
 
 /* ============================================================================
@@ -635,10 +708,12 @@ input[type="radio"] {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: var(--z-modal);
-  width: min(100% - 2 * var(--space-4), 28rem);
-  max-height: min(90dvh, 40rem);
+  width: min(100% - 2 * var(--space-4), 32rem);
+  /* Spacious by default so Save/actions fit without scroll on desktop */
+  min-height: min(36rem, 85dvh);
+  max-height: min(92dvh, 48rem);
   overflow: auto;
-  padding: var(--space-5) var(--space-4);
+  padding: var(--space-6) var(--space-5);
   background: var(--bg-elevated);
   color: var(--text-primary);
   border: 1px solid var(--border);
@@ -647,6 +722,17 @@ input[type="radio"] {
   text-align: center;
   transition: background-color var(--transition), color var(--transition),
     border-color var(--transition);
+}
+
+/* Desktop: tall enough that Save + actions fit without forced scroll */
+@media (min-width: 768px) {
+  #settingsWindow,
+  #rulesWindow {
+    min-height: 38rem;
+    max-height: min(90vh, 52rem);
+    overflow-y: auto;
+    padding-bottom: var(--space-7);
+  }
 }
 
 /* When opened via inline style or class */
@@ -673,21 +759,25 @@ input[type="radio"] {
   align-items: stretch;
   gap: var(--space-3);
   margin: auto;
-  width: min(100%, 28rem);
+  width: min(100%, 32rem);
 }
 
 #settingsWindow h2,
 #rulesWindow h2 {
   margin-bottom: var(--space-2);
   text-align: center;
+  flex-shrink: 0;
 }
 
+/* Action row sticks to bottom of tall modal; survives Save appearing */
 .modal-actions {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
   justify-content: center;
-  margin-top: var(--space-3);
+  margin-top: auto;
+  padding-top: var(--space-4);
+  flex-shrink: 0;
 }
 
 .modal-actions .btn,
@@ -696,6 +786,13 @@ input[type="radio"] {
   margin: 0;
   flex: 1 1 auto;
   min-width: 7rem;
+}
+
+/* Mind Calc close button without .modal-actions wrapper */
+#settingsWindow > .closeWinBtn,
+#rulesWindow > .closeWinBtn {
+  margin-top: auto;
+  flex-shrink: 0;
 }
 
 /* Body scroll lock while modal open */
@@ -824,6 +921,9 @@ progress[value]::-moz-progress-bar {
 
   body {
     padding: var(--space-3) 0 var(--space-4);
+    padding-left: env(safe-area-inset-left, 0);
+    padding-right: env(safe-area-inset-right, 0);
+    padding-bottom: max(var(--space-4), env(safe-area-inset-bottom, 0));
   }
 
   header.appElement,
@@ -841,6 +941,16 @@ progress[value]::-moz-progress-bar {
 
   header h1 {
     font-size: var(--font-size-md);
+    max-width: calc(100% - 2 * var(--touch-min) - 2 * var(--space-3));
+    white-space: normal;
+  }
+
+  #settingsWindow,
+  #rulesWindow {
+    min-height: 0;
+    max-height: min(88dvh, 100%);
+    width: min(100% - 2 * var(--space-3), 32rem);
+    padding: var(--space-4) var(--space-3);
   }
 
   .btn-block,

@@ -51,10 +51,14 @@
 
     <footer class="appElement">
         <section class="socials">
-            <a href="mailto:maxeleron@gmail.com" class="socialLink" title="My Mail">
-                <img src="materials/gmail_icon.png" alt="Mail link">
+            <a href="mailto:maxeleron@gmail.com" class="socialLink" title="Email" aria-label="Email">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                </svg>
             </a>
-            <a href="https://github.com/maxeleron" class="socialLink" title="My GitHub account">
+            <a href="https://github.com/maxeleron" class="socialLink" title="My GitHub account" aria-label="GitHub">
                 <img src="materials/GitHub-Mark-64px.png" alt="GitHub profile link">
             </a>
         </section>
@@ -65,29 +69,29 @@
             <h2 id="vmSettingsTitle">Settings</h2>
 
             <label for="amountSettings">Display elements
-                <input type="number" id="amountSettings" max="20" min="2">
+                <input type="number" id="amountSettings" max="20" min="2" value="5">
             </label>
 
             <div class="form-row">
                 <span class="form-label" id="borderSettingsLabel">Border size</span>
                 <select id="borderSettings" aria-labelledby="borderSettingsLabel">
                     <option value="small">Small</option>
-                    <option value="medium">Medium</option>
+                    <option value="medium" selected>Medium</option>
                     <option value="lagre">Large</option>
                 </select>
             </div>
 
             <label for="delayToggle">
-                <input type="checkbox" id="delayToggle">
+                <input type="checkbox" id="delayToggle" checked>
                 Delay time
             </label>
 
             <label for="timerSettings">Timer (seconds)
-                <input type="number" id="timerSettings" max="60" min="1">
+                <input type="number" id="timerSettings" max="60" min="1" value="5">
             </label>
 
             <label for="gameRulesToggle">
-                <input type="checkbox" id="gameRulesToggle">
+                <input type="checkbox" id="gameRulesToggle" checked>
                 Show game rules
             </label>
 

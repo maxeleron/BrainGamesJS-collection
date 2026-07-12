@@ -50,6 +50,7 @@ function isSettingsOpen() {
 }
 
 function openSettings() {
+  syncSettingsForm();
   settingsWindow.style.display = "flex";
   document.body.classList.add("modal-open");
   if (window.BGJSTheme) {

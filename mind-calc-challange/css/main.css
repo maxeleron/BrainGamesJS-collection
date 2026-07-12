@@ -19,21 +19,9 @@
   --accent-contrast: #0f172a;
 }
 
-/* Header: title + concentration + settings on one row */
-header.appElement,
-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-2);
-  position: relative;
-  padding-right: calc(var(--touch-min) * 2 + var(--space-4));
-}
-
+/* Title stays absolute-centered via shared-ui; actions sit on the right */
 header h1 {
   cursor: pointer;
-  flex: 1;
-  text-align: center;
 }
 
 header h1:hover {
@@ -41,10 +29,6 @@ header h1:hover {
 }
 
 #concentrationBtn {
-  position: absolute;
-  right: calc(var(--touch-min) + var(--space-3) + var(--space-2));
-  top: 50%;
-  transform: translateY(-50%);
   width: var(--touch-min);
   height: var(--touch-min);
   min-width: var(--touch-min);
@@ -62,17 +46,7 @@ header h1:hover {
 #concentrationBtn:hover {
   background: var(--accent);
   border-color: var(--accent);
-}
-
-#settingsGear {
-  position: absolute;
-  right: var(--space-3);
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-#settingsGear:active {
-  transform: translateY(-50%) scale(0.96);
+  color: #fff;
 }
 
 /* Playground expression */

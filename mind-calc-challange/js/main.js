@@ -48,8 +48,22 @@ function isUiOpen(windowName) {
   return d === "block" || d === "flex";
 }
 
+function ensureMindCalcSettingsDefaults() {
+  var questions = document.getElementById("questionsAmount");
+  var colorRule = document.getElementById("colorRuleValue");
+  if (questions && (questions.value === "" || questions.value == null)) {
+    questions.value = "10";
+  }
+  if (colorRule && (colorRule.value === "" || colorRule.value == null)) {
+    colorRule.value = "2";
+  }
+}
+
 //Declaring functions to open and close these windows
 function openUiWindow(windowName) {
+  if (windowName === settingsWindow) {
+    ensureMindCalcSettingsDefaults();
+  }
   windowName.style.display = "flex";
   document.body.classList.add("modal-open");
   if (windowName === settingsWindow && window.BGJSTheme) {

@@ -51,10 +51,14 @@
 
     <footer class="appElement">
         <section class="socials">
-            <a href="mailto:maxeleron@gmail.com" class="socialLink" title="My Mail">
-                <img src="materials/gmail_icon.png" alt="Mail link">
+            <a href="mailto:maxeleron@gmail.com" class="socialLink" title="Email" aria-label="Email">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                </svg>
             </a>
-            <a href="https://github.com/maxeleron" class="socialLink" title="My GitHub account">
+            <a href="https://github.com/maxeleron" class="socialLink" title="My GitHub account" aria-label="GitHub">
                 <img src="materials/GitHub-Mark-64px.png" alt="GitHub profile link">
             </a>
         </section>
@@ -64,14 +68,14 @@
         <h2 id="settingsTitle">Settings</h2>
 
         <label for="tilesAmount">Tiles amount
-            <input type="number" id="tilesAmount" max="36" min="2">
+            <input type="number" id="tilesAmount" max="36" min="2" value="8">
         </label>
 
         <div class="form-row">
             <span class="form-label" id="tileSizeLabel">Tile size</span>
             <select id="tileSize" aria-labelledby="tileSizeLabel">
                 <option value="small">Small</option>
-                <option value="medium">Medium</option>
+                <option value="medium" selected>Medium</option>
                 <option value="large">Large</option>
             </select>
         </div>
@@ -80,13 +84,13 @@
             <span class="form-label" id="tileFormatLabel">Tile format</span>
             <select id="tileFormat" aria-labelledby="tileFormatLabel">
                 <option value="narrow">Narrow</option>
-                <option value="normal">Normal</option>
+                <option value="normal" selected>Normal</option>
                 <option value="wide">Wide</option>
             </select>
         </div>
 
         <label for="gameRulesToggle">
-            <input type="checkbox" id="gameRulesToggle">
+            <input type="checkbox" id="gameRulesToggle" checked>
             Show game rules
         </label>
 

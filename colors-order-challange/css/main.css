@@ -148,6 +148,12 @@
 }
 
 /* When JS sets display:block, keep button styling intact */
-#saveLocalSettings[style*="block"] {
+#saveLocalSettings[style*="block"],
+#saveLocalSettings[style*="flex"] {
   display: inline-flex !important;
+}
+
+/* Reserve action-row space so revealing Save doesn't force modal scroll */
+#settingsWindow .modal-actions {
+  min-height: calc(var(--touch-min) + var(--space-2));
 }

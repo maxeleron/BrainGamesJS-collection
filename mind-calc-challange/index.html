@@ -23,17 +23,19 @@
 <body>
     <header class="appElement">
         <h1 title="click to see rules">Mind Calc Challenge</h1>
-        <button type="button" id="concentrationBtn" class="btn btn-ghost" title="Concentration mode"
-            aria-label="Concentration mode">C</button>
-        <button type="button" id="settingsGear" title="Settings" aria-label="Open settings">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="12" cy="12" r="3"></circle>
-                <path
-                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z">
-                </path>
-            </svg>
-        </button>
+        <div class="header-actions">
+            <button type="button" id="concentrationBtn" class="btn btn-ghost" title="Concentration mode"
+                aria-label="Concentration mode">C</button>
+            <button type="button" id="settingsGear" title="Settings" aria-label="Open settings">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path
+                        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z">
+                    </path>
+                </svg>
+            </button>
+        </div>
     </header>
 
     <main id="main" class="appElement">
@@ -50,10 +52,15 @@
 
     <footer class="appElement">
         <section class="socials">
-            <a href="mailto:maxeleron@gmail.com" id="ownersMail" class="socialLink" title="My Mail">
-                <img src="materials/gmail_icon.png" alt="Mail link">
+            <a href="mailto:maxeleron@gmail.com" id="ownersMail" class="socialLink" title="Email" aria-label="Email">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                </svg>
             </a>
-            <a href="https://github.com/maxeleron" id="ownersGitHub" class="socialLink" title="My GitHub account">
+            <a href="https://github.com/maxeleron" id="ownersGitHub" class="socialLink" title="My GitHub account"
+                aria-label="GitHub">
                 <img src="materials/GitHub-Mark-64px.png" alt="GitHub profile link">
             </a>
         </section>
@@ -71,25 +78,23 @@
         <table id="settingsTable">
             <tr>
                 <td>Amount of questions</td>
-                <td><input type="number" value="10" min="1" max="50"></td>
+                <td><input type="number" id="questionsAmount" value="10" min="1" max="50"></td>
             </tr>
             <tr>
-                <td colspan="2">Colors and values</td>
+                <td colspan="2"><strong>Colors and values</strong></td>
             </tr>
             <tr id="1RuleRow">
-                <td></td>
-                <td><input type="number" value="+2"></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
+                <td>
+                    <label for="colorRuleValue">Color rule offset</label>
+                </td>
+                <td><input type="number" id="colorRuleValue" value="2" step="1"></td>
             </tr>
             <tr>
                 <td>
                     <label for="hintsCheckbox">Turn ON / OFF hints:</label>
                 </td>
                 <td>
-                    <input type="checkbox" id="hintsCheckbox" value="checked">
+                    <input type="checkbox" id="hintsCheckbox" checked>
                 </td>
             </tr>
             <tr>
@@ -97,7 +102,7 @@
                     <label for="progressCheckbox">Turn ON / OFF progress:</label>
                 </td>
                 <td>
-                    <input type="checkbox" id="progressCheckbox" value="checked">
+                    <input type="checkbox" id="progressCheckbox" checked>
                 </td>
             </tr>
         </table>

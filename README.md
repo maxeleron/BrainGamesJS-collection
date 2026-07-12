@@ -44,7 +44,12 @@ A bunch of javascript-based browser games, that has next purposes:
 - [ ] _User can choose amount of tiles_
 - [ ] _Timer for quiz_
 
-## 3. String Search Challenge
+## 3. Visual memory Challenge
+
+**Visual memory challange** - 
+
+
+## 4. String Search Challenge
 
 **String Search Challenge** - is a simple visual game where player should use sight to quickly search and _(for example: User choose word length from 2 to 6 letters, and font size, and as fast as their can )_
 
