@@ -16,7 +16,7 @@ const checkAnswers = (field) => {
   console.log("right " + rightAnswers + ", wrong " + wrongAnswers);
 };
 
-//Getting Game Buttons
+// Getting Game Buttons
 const playBtn = document.getElementById("playBtn");
 const rememberedBtn = document.getElementById("rememberedBtn");
 const commitBtn = document.getElementById("commitBtn");
@@ -25,24 +25,27 @@ const gameRules = document.getElementById("gameRules");
 
 let gameTilesArr;
 
-/*DOM elements */
+/* DOM elements */
 const playground = document.getElementById("playground");
 
 const playBtnHandleFunc = () => {
   switch (playBtn.innerText) {
     case "Play":
     case "Play Again": {
+      // Clean up previous game (sortable instance + tiles)
+      if (gameTilesArr) {
+        gameTilesArr.disableSortable();
+      }
       playground.innerHTML = "";
-      /*Game elements */
+
       gameTilesArr = new GameTilesArr(
         settingsObject.tilesAmount,
         settingsObject.tileSize,
         settingsObject.tileFormat
       );
       gameTilesArr.display(playground);
-      //hiding playBtn and displaying remembered Btn
-      playBtn.innerText = "I Remembered";
 
+      playBtn.innerText = "I Remembered";
       gameRules.innerText = "Remember order of colors below:";
 
       break;
@@ -51,10 +54,12 @@ const playBtnHandleFunc = () => {
     case "I Remembered": {
       gameRules.innerText = "Restore order of colors below:";
 
-      gameTilesArr.enableSortable(playground);
+      // Shuffle array, re-render in new order, then enable drag & drop
       gameTilesArr.shuffle();
+      playground.innerHTML = "";
       gameTilesArr.display(playground);
-      //hiding rememberedBtn and displaying commit answerBtn
+      gameTilesArr.enableSortable(playground);
+
       playBtn.innerText = "Commit Answer";
 
       window.scrollTo(0, 0);

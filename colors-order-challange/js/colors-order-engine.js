@@ -4,11 +4,11 @@ class GameTile {
   constructor(Id, Color, Size, Format) {
     this.node = document.createElement("div");
     this.id = Id;
-    //Setting bg of tile to selected color
+    // Setting bg of tile to selected color
     this.node.style.background = Color;
-    //Each tile will get class gameTile for styling
+    // Each tile will get class gameTile for styling
     this.node.classList.add("gameTile");
-    //In dependence of settings size & format are custom
+    // In dependence of settings size & format are custom
     this.node.classList.add(Size + "Tile");
     this.node.classList.add(Format + "Tile");
   }
@@ -16,43 +16,60 @@ class GameTile {
 
 class GameTilesArr {
   constructor(ElementsAmount, ElementSize, ElementFormat) {
-    let colorsArr = COLORS_ARR;
-    for (let i = 0; i < ElementsAmount; i++) {
-      /* splicing the colorsArr we return deleted element (which is colors` code),
-      which is random due to Math.random(), 
-      as I tested splice do Math.floor() automaticly on getting first argument */
-      const randColor = colorsArr.splice(Math.random() * colorsArr.length, 1);
+    // Clone so the shared COLORS_ARR is never mutated
+    const colorsArr = COLORS_ARR.slice();
+    const amount = Number(ElementsAmount);
+
+    for (let i = 0; i < amount; i++) {
+      // splice returns an array of deleted items — take the color string
+      const randColor = colorsArr.splice(
+        Math.floor(Math.random() * colorsArr.length),
+        1
+      )[0];
 
       this[i] = new GameTile(i, randColor, ElementSize, ElementFormat);
-      this[i].node.id = i;
+      this[i].node.id = String(i);
     }
-    this.length = ElementsAmount;
+    this.length = amount;
+    this.sortable = null;
   }
+
   display(displayField) {
     this.each((that) => {
       displayField.append(that.node);
     });
   }
+
   shuffle() {
     for (let i = this.length - 1; i > 0; i--) {
-      let j = Math.floor(Math.random() * (i + 1));
+      const j = Math.floor(Math.random() * (i + 1));
       [this[i], this[j]] = [this[j], this[i]];
     }
   }
+
   enableSortable(sortField) {
-    Sortable.create(sortField, {
-      handle: ".sortable",
+    // Destroy any previous instance before creating a new one
+    this.disableSortable();
+
+    this.sortable = Sortable.create(sortField, {
       animation: 120,
     });
+
     this.each((that) => {
       that.node.classList.add("sortable");
     });
   }
+
   disableSortable() {
+    if (this.sortable) {
+      this.sortable.destroy();
+      this.sortable = null;
+    }
     this.each((that) => {
       that.node.classList.remove("sortable");
     });
   }
+
   each(func) {
     for (let i = 0; i < this.length; i++) {
       func(this[i]);
@@ -60,9 +77,9 @@ class GameTilesArr {
   }
 }
 
-/*Colors array */
+/* Colors array — never mutate this; always clone before use */
 const COLORS_ARR = [
-  "#FFFF33" /*Light yellow*/,
+  "#FFFF33" /* Light yellow */,
   "#CC9900",
   "#CC6600",
   "#CC6633",
@@ -80,12 +97,12 @@ const COLORS_ARR = [
   "#6633FF",
   "#6666CC",
   "#3300CC",
-  "#0000CC" /*Blue */,
+  "#0000CC" /* Blue */,
   "#0033FF",
   "#0099FF",
   "#00CCFF",
   "#339999",
-  "#66FFFF" /*Ocean blue */,
+  "#66FFFF" /* Ocean blue */,
   "#00FFCC",
   "#00CC99",
   "#33CC66",
