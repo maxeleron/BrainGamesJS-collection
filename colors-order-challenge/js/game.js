@@ -45,6 +45,7 @@ const playBtnHandleFunc = () => {
   switch (playBtn.innerText) {
     case "Play":
     case "Play Again": {
+      closeCustomSizeEditor();
       // Clean up previous game (sortable instance + tiles)
       if (gameTilesArr) {
         gameTilesArr.disableSortable();
@@ -57,7 +58,8 @@ const playBtnHandleFunc = () => {
 
       gameTilesArr = new GameTilesArr(
         settingsObject.tilesAmount,
-        settingsObject.tileSize
+        settingsObject.tileSize,
+        { width: settingsObject.customWidth, height: settingsObject.customHeight }
       );
       gameTilesArr.display(playground);
 

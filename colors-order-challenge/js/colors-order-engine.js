@@ -1,7 +1,7 @@
 "use strict";
 
 class GameTile {
-  constructor(Id, Color, Size) {
+  constructor(Id, Color, Size, CustomSize = { width: 256, height: 112 }) {
     this.node = document.createElement("div");
     this.id = Id;
     // Setting bg of tile to selected color
@@ -9,12 +9,17 @@ class GameTile {
     // Each tile will get class gameTile for styling
     this.node.classList.add("gameTile");
     // Size controls both tile height and width.
-    this.node.classList.add(Size + "Tile");
+    if (Size === "custom") {
+      this.node.style.width = CustomSize.width + "px";
+      this.node.style.height = CustomSize.height + "px";
+    } else {
+      this.node.classList.add(Size + "Tile");
+    }
   }
 }
 
 class GameTilesArr {
-  constructor(ElementsAmount, ElementSize) {
+  constructor(ElementsAmount, ElementSize, CustomSize) {
     // Clone so the shared COLORS_ARR is never mutated
     const colorsArr = COLORS_ARR.slice();
     const amount = Number(ElementsAmount);
@@ -26,7 +31,7 @@ class GameTilesArr {
         1
       )[0];
 
-      this[i] = new GameTile(i, randColor, ElementSize);
+      this[i] = new GameTile(i, randColor, ElementSize, CustomSize);
       this[i].node.id = String(i);
     }
     this.length = amount;
