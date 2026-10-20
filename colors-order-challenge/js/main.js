@@ -9,12 +9,12 @@ class Settings {
     }
     //if there are local settings implement them to current game
     else {
-      const { tilesAmount, tileSize, tileFormat, showGameRules } = JSON.parse(
+      const { tilesAmount, tileSize = "medium", tileDisplay, showGameRules } = JSON.parse(
         localStorage.getItem("settingsObject")
       );
       this.tilesAmount = tilesAmount;
       this.tileSize = tileSize;
-      this.tileFormat = tileFormat;
+      this.tileDisplay = tileDisplay || "horizontal";
       this.showGameRules = showGameRules;
     }
   }
@@ -24,7 +24,7 @@ class Settings {
   restoreDefaults() {
     this.tilesAmount = 8;
     this.tileSize = "medium";
-    this.tileFormat = "normal";
+    this.tileDisplay = "horizontal";
     this.showGameRules = true;
     this.save();
   }
@@ -53,9 +53,6 @@ function openSettings() {
   syncSettingsForm();
   settingsWindow.style.display = "flex";
   document.body.classList.add("modal-open");
-  if (window.BGJSTheme) {
-    window.BGJSTheme.syncThemeControls();
-  }
 }
 
 function closeSettings() {
@@ -74,16 +71,20 @@ closeSettingsWindow.addEventListener("click", () => {
 
 //Settings ui elements
 const tilesAmountInput = document.getElementById("tilesAmount");
-const tilesSizeSelect = document.getElementById("tileSize");
-const tilesFormatSelect = document.getElementById("tileFormat");
+const tilesSizeInputs = document.querySelectorAll('input[name="tileSize"]');
+const tilesDisplayInputs = document.querySelectorAll('input[name="tileDisplay"]');
 const gameRulesToggle = document.getElementById("gameRulesToggle");
 const saveSettingsBtn = document.getElementById("saveLocalSettings");
 const restoreSettingsBtn = document.getElementById("restoreSettings");
 
 function syncSettingsForm() {
   tilesAmountInput.value = settingsObject.tilesAmount;
-  tilesSizeSelect.value = settingsObject.tileSize;
-  tilesFormatSelect.value = settingsObject.tileFormat;
+  tilesSizeInputs.forEach((input) => {
+    input.checked = input.value === settingsObject.tileSize;
+  });
+  tilesDisplayInputs.forEach((input) => {
+    input.checked = input.value === settingsObject.tileDisplay;
+  });
   gameRulesToggle.checked = settingsObject.showGameRules;
 }
 
@@ -96,16 +97,33 @@ function applyRulesVisibility() {
 syncSettingsForm();
 applyRulesVisibility();
 
-settingsWindow.addEventListener("change", (event) => {
-  // Theme changes are applied instantly via BGJSTheme; still show Save for game settings
-  if (event.target && event.target.name === "bgjs_theme") return;
+tilesAmountInput.addEventListener("input", () => {
+  const tilesAmount = Number(tilesAmountInput.value);
+  if (!tilesAmountInput.checkValidity() || !Number.isInteger(tilesAmount) || tilesAmount < 2) return;
+
+  settingsObject.tilesAmount = tilesAmount;
+  settingsObject.save();
+});
+
+tilesSizeInputs.forEach((input) => {
+  input.addEventListener("change", () => {
+    settingsObject.tileSize = input.value;
+    settingsObject.save();
+  });
+});
+
+tilesDisplayInputs.forEach((input) => {
+  input.addEventListener("change", () => {
+    settingsObject.tileDisplay = input.value;
+    settingsObject.save();
+  });
+});
+
+gameRulesToggle.addEventListener("change", () => {
   saveSettingsBtn.style.display = "block";
 });
 
 saveSettingsBtn.addEventListener("click", () => {
-  settingsObject.tilesAmount = tilesAmountInput.value;
-  settingsObject.tileSize = tilesSizeSelect.value;
-  settingsObject.tileFormat = tilesFormatSelect.value;
   settingsObject.showGameRules = gameRulesToggle.checked;
 
   settingsObject.save();
@@ -124,10 +142,20 @@ if (restoreSettingsBtn) {
 /*==============
 end:Settings*/
 
+// Footer visibility
+const toggleFooterBtn = document.getElementById("toggleFooterBtn");
+
+toggleFooterBtn.addEventListener("click", () => {
+  const collapsed = document.body.classList.toggle("footer-collapsed");
+  toggleFooterBtn.setAttribute("aria-expanded", String(!collapsed));
+  toggleFooterBtn.title = collapsed ? "Expand footer" : "Collapse footer";
+});
+
 //Global key events
 window.addEventListener("keydown", (event) => {
   if (event.key === "Escape" || event.keyCode == 27) closeSettings(); //Esc
   if (event.key === "Enter" || event.keyCode == 13) {
+    if (event.target && event.target.closest("#themeToggleBtn, #changeSettingsBtn, #toggleFooterBtn, .segmented-control")) return;
     const playBtn = document.getElementById("playBtn");
     if (playBtn && !isSettingsOpen()) playBtn.click();
   }

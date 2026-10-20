@@ -23,15 +23,28 @@
 <body>
     <header class="appElement">
         <h1>Colors Order Challenge</h1>
-        <button type="button" id="settingsGear" title="Settings" aria-label="Open settings">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="12" cy="12" r="3"></circle>
-                <path
-                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z">
-                </path>
-            </svg>
-        </button>
+        <div class="header-actions">
+            <button type="button" id="themeToggleBtn" aria-label="Toggle theme" aria-pressed="false">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 12.79A9 9 0 0 1 11.21 3 9 9 0 1 0 21 12.79z"></path>
+                </svg>
+            </button>
+            <button type="button" id="settingsGear" title="Settings" aria-label="Open settings">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path
+                        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z">
+                    </path>
+                </svg>
+            </button>
+        </div>
     </header>
 
     <main class="appElement">
@@ -46,11 +59,64 @@
 
         <div id="playground"></div>
 
-        <button type="button" id="playBtn" class="button btn btn-primary btn-block">Play</button>
+        <div id="quickSettings">
+            <label for="tilesAmount">Tiles amount
+                <input type="number" id="tilesAmount" max="36" min="2" value="8">
+            </label>
+
+            <div class="form-row">
+                <span class="form-label" id="tileSizeLabel">Tile size</span>
+                <div id="tileSize" class="segmented-control" role="radiogroup" aria-labelledby="tileSizeLabel">
+                    <label>
+                        <input type="radio" name="tileSize" value="small">
+                        Small
+                    </label>
+                    <label>
+                        <input type="radio" name="tileSize" value="medium" checked>
+                        Medium
+                    </label>
+                    <label>
+                        <input type="radio" name="tileSize" value="large">
+                        Large
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <span class="form-label" id="tileDisplayLabel">Tile display</span>
+                <div id="tileDisplay" class="segmented-control" role="radiogroup" aria-labelledby="tileDisplayLabel">
+                    <label>
+                        <input type="radio" name="tileDisplay" value="horizontal" checked>
+                        Horizontal
+                    </label>
+                    <label>
+                        <input type="radio" name="tileDisplay" value="vertical">
+                        Vertical
+                    </label>
+                    <label>
+                        <input type="radio" name="tileDisplay" value="cubic">
+                        Cubic
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-buttons-container">
+            <button type="button" id="playBtn" class="button btn btn-primary btn-block">Play</button>
+            <button type="button" id="changeSettingsBtn" class="button btn btn-secondary" style="display: none;">Change Settings</button>
+        </div>
+
+        <button type="button" id="toggleFooterBtn" class="footer-toggle" aria-label="Toggle footer visibility"
+            aria-controls="gameFooter" aria-expanded="true" title="Collapse footer">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m18 15-6-6-6 6"></path>
+            </svg>
+        </button>
     </main>
 
-    <footer class="appElement">
-        <section class="socials">
+    <footer class="appElement" id="gameFooter">
+        <section class="socials" id="footerSocials">
             <a href="mailto:maxeleron@gmail.com" class="socialLink" title="Email" aria-label="Email">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -67,46 +133,10 @@
     <div id="settingsWindow" class="appElement" role="dialog" aria-labelledby="settingsTitle" aria-modal="true">
         <h2 id="settingsTitle">Settings</h2>
 
-        <label for="tilesAmount">Tiles amount
-            <input type="number" id="tilesAmount" max="36" min="2" value="8">
-        </label>
-
-        <div class="form-row">
-            <span class="form-label" id="tileSizeLabel">Tile size</span>
-            <select id="tileSize" aria-labelledby="tileSizeLabel">
-                <option value="small">Small</option>
-                <option value="medium" selected>Medium</option>
-                <option value="large">Large</option>
-            </select>
-        </div>
-
-        <div class="form-row">
-            <span class="form-label" id="tileFormatLabel">Tile format</span>
-            <select id="tileFormat" aria-labelledby="tileFormatLabel">
-                <option value="narrow">Narrow</option>
-                <option value="normal" selected>Normal</option>
-                <option value="wide">Wide</option>
-            </select>
-        </div>
-
         <label for="gameRulesToggle">
             <input type="checkbox" id="gameRulesToggle" checked>
             Show game rules
         </label>
-
-        <div class="form-row">
-            <span class="form-label">Theme</span>
-            <div class="theme-toggle" role="radiogroup" aria-label="Color theme">
-                <label>
-                    <input type="radio" name="bgjs_theme" value="light" checked>
-                    Light
-                </label>
-                <label>
-                    <input type="radio" name="bgjs_theme" value="dark">
-                    Dark
-                </label>
-            </div>
-        </div>
 
         <div class="modal-actions">
             <button type="button" id="restoreSettings" class="button btn btn-secondary">Restore defaults</button>

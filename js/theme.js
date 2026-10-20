@@ -35,6 +35,11 @@
 
   function syncThemeControls(theme) {
     var t = normalizeTheme(theme || getStoredTheme());
+    var toggleButton = document.getElementById("themeToggleBtn");
+    if (toggleButton) {
+      toggleButton.setAttribute("aria-pressed", String(t === "dark"));
+      toggleButton.setAttribute("title", t === "dark" ? "Switch to light theme" : "Switch to dark theme");
+    }
     var radios = document.querySelectorAll('input[name="bgjs_theme"]');
     for (var i = 0; i < radios.length; i++) {
       radios[i].checked = radios[i].value === t;
@@ -52,20 +57,26 @@
     applyTheme(target.value);
   }
 
+  function onThemeToggleClick() {
+    var currentTheme = document.documentElement.getAttribute("data-theme");
+    applyTheme(currentTheme === "dark" ? "light" : "dark");
+  }
+
   /**
-   * Wire settings theme radios and apply saved theme.
+   * Wire available theme controls and apply saved theme.
    * Safe to call after DOM is ready.
    */
   function initTheme() {
     applyTheme(getStoredTheme());
 
-    // Delegate change events (works even if controls are added later)
-    document.addEventListener("change", onThemeControlChange);
+    var toggleButton = document.getElementById("themeToggleBtn");
+    if (toggleButton) {
+      toggleButton.addEventListener("click", onThemeToggleClick);
+    }
 
-    // Also bind direct clicks on the theme-toggle group for reliability
-    var groups = document.querySelectorAll(".theme-toggle");
-    for (var i = 0; i < groups.length; i++) {
-      groups[i].addEventListener("change", onThemeControlChange);
+    // Other games still use radio controls; Colors Order has no change listener.
+    if (document.querySelectorAll('input[name="bgjs_theme"]').length) {
+      document.addEventListener("change", onThemeControlChange);
     }
   }
 

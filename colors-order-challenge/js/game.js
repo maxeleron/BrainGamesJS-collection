@@ -18,15 +18,28 @@ const checkAnswers = (field) => {
 
 // Getting Game Buttons
 const playBtn = document.getElementById("playBtn");
+const changeSettingsBtn = document.getElementById("changeSettingsBtn");
 const rememberedBtn = document.getElementById("rememberedBtn");
 const commitBtn = document.getElementById("commitBtn");
 
 const gameRules = document.getElementById("gameRules");
+const initialGameRulesHtml = gameRules.innerHTML;
 
 let gameTilesArr;
 
 /* DOM elements */
 const playground = document.getElementById("playground");
+const quickSettings = document.getElementById("quickSettings");
+const appShellElements = document.querySelectorAll(
+  "header.appElement, main.appElement, footer.appElement"
+);
+
+playground.addEventListener("wheel", (event) => {
+  if (!playground.classList.contains("display-vertical") || event.deltaY === 0 || event.ctrlKey) return;
+
+  event.preventDefault();
+  playground.scrollLeft += event.deltaY;
+}, { passive: false });
 
 const playBtnHandleFunc = () => {
   switch (playBtn.innerText) {
@@ -37,15 +50,20 @@ const playBtnHandleFunc = () => {
         gameTilesArr.disableSortable();
       }
       playground.innerHTML = "";
+      playground.className = "display-" + settingsObject.tileDisplay;
+      appShellElements.forEach((element) => {
+        element.classList.toggle("expanded-layout", settingsObject.tileDisplay === "vertical");
+      });
 
       gameTilesArr = new GameTilesArr(
         settingsObject.tilesAmount,
-        settingsObject.tileSize,
-        settingsObject.tileFormat
+        settingsObject.tileSize
       );
       gameTilesArr.display(playground);
 
       playBtn.innerText = "I Remembered";
+      quickSettings.style.display = "none";
+      changeSettingsBtn.style.display = "none";
       gameRules.innerText = "Remember order of colors below:";
 
       break;
@@ -61,6 +79,7 @@ const playBtnHandleFunc = () => {
       gameTilesArr.enableSortable(playground);
 
       playBtn.innerText = "Commit Answer";
+      quickSettings.style.display = "none";
 
       window.scrollTo(0, 0);
 
@@ -72,6 +91,8 @@ const playBtnHandleFunc = () => {
       checkAnswers(playground);
 
       playBtn.innerText = "Play Again";
+      quickSettings.style.display = "none";
+      changeSettingsBtn.style.display = "inline-flex";
       break;
     }
 
@@ -82,3 +103,18 @@ const playBtnHandleFunc = () => {
 };
 
 playBtn.addEventListener("click", playBtnHandleFunc);
+
+changeSettingsBtn.addEventListener("click", () => {
+  if (gameTilesArr) {
+    gameTilesArr.disableSortable();
+    gameTilesArr = null;
+  }
+  playground.innerHTML = "";
+  appShellElements.forEach((element) => {
+    element.classList.remove("expanded-layout");
+  });
+  quickSettings.style.display = "";
+  changeSettingsBtn.style.display = "none";
+  playBtn.innerText = "Play";
+  gameRules.innerHTML = initialGameRulesHtml;
+});
